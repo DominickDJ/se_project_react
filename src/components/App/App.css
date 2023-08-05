@@ -1,0 +1,40 @@
+.main {
+  padding: 0 20px;
+}
+.weather {
+  position: relative;
+}
+.weather__info {
+  position: absolute;
+  top: 12px;
+  left: 16px;
+  color: white;
+  font-size: 36px;
+}
+.weather_image {
+  width: 100%;
+}
+.card__section {
+  margin-top: 20px;
+}
+.card__name {
+  text-align: center;
+}
+.card__image {
+  width: 325px;
+  height: 328px;
+  border-radius: 10px;
+}
+.card__items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 20px;
+}
+.footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  padding: 0 20px;
+}

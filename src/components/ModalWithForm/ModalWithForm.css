@@ -1,0 +1,26 @@
+.modal {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.modal__content {
+  max-width: 430px;
+  background: white;
+  padding: 34px 36px;
+  border-radius: 10px;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.modal__form {
+  box-sizing: border-box;
+  margin: 0 auto;
+  background: white;
+}
