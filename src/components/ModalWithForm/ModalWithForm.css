@@ -11,7 +11,6 @@
 }
 
 .modal__content {
-  max-width: 430px;
   background: white;
   padding: 34px 36px;
   border-radius: 20px;
@@ -30,6 +29,12 @@
   box-sizing: border-box;
   margin: 0 auto;
   background: white;
+  display: flex;
+  flex-direction: column;
+}
+.modal__label {
+  display: flex;
+  flex-direction: column;
 }
 .modal__submit-button {
   background-color: #000000;

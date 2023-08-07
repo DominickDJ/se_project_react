@@ -36,11 +36,11 @@ export default function App() {
       <Footer />
       {activeModal === "create" && (
         <ModalWithForm title="New Garment" onClose={handleCloseModal}>
-          <label>
+          <label className="modal__label">
             <span>Name</span>
             <input type="text" name="name" minLength="1" maxLength="30" />
           </label>
-          <label>
+          <label className="modal__label">
             <span>Image</span>
             <input type="url" name="link" minLength="1" maxLength="30" />
           </label>
