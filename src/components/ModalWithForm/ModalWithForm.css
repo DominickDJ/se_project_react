@@ -14,13 +14,44 @@
   max-width: 430px;
   background: white;
   padding: 34px 36px;
-  border-radius: 10px;
+  border-radius: 20px;
   position: relative;
   box-sizing: border-box;
+  border: 1px;
+  font-family: Cabinet Grotesk;
+  font-size: 16px;
+  line-height: 20px;
 }
-
+.modal_title {
+  padding-bottom: 24px;
+  margin: 0;
+}
 .modal__form {
   box-sizing: border-box;
   margin: 0 auto;
   background: white;
+}
+.modal__submit-button {
+  background-color: #000000;
+  color: #e5e5e5;
+  text-align: center;
+  border: 0;
+  padding: 8px, 16px, 8px, 16px;
+  margin-top: 15px;
+  box-sizing: border-box;
+  width: 124px;
+  height: 36px;
+  gap: 8px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.modal__close-button {
+  background: transparent center no-repeat url("../images/closeButton.svg");
+  height: 20px;
+  width: 20px;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  right: 28px;
+  top: 20px;
 }

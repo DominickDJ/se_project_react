@@ -20,9 +20,9 @@ export default function Main({ weatherTemp, onSelectedCard }) {
 
   return (
     <main className="main">
-      <WeatherCard day={true} type="fog" weatherTemp={weatherTemp} />
+      <WeatherCard day={true} type="snow" weatherTemp={weatherTemp} />
       <section className="card__section" id="cardSection">
-        Today is {weatherTemp} / You may want to wear:
+        Today is {weatherTemp}°F / You may want to wear:
         <div className="card__items">
           {defaultClothingItems.map((item) => (
             <ItemCard

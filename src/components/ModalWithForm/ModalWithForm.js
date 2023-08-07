@@ -9,12 +9,18 @@ export default function ModalWithForm({
   return (
     <div className={`modal modal_type_${name}`}>
       <div className="modal__content">
-        <button type="button" onClick={onClose}>
-          close
-        </button>
-        <h3>{title}</h3>
-        <form className="modal__form">{children}</form>
-        <button type="submit">{buttonText}</button>
+        <button
+          className="modal__close-button"
+          type="button"
+          onClick={onClose}
+        ></button>
+        <form className="modal__form">
+          <h3 className="modal_title">{title}</h3>
+          {children}
+          <button type="submit" className="modal__submit-button">
+            {buttonText}
+          </button>
+        </form>
       </div>
     </div>
   );

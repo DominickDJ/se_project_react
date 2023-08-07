@@ -14,24 +14,7 @@
 .weather_image {
   width: 100%;
 }
-.card__section {
-  margin-top: 20px;
-}
-.card__name {
-  text-align: center;
-}
-.card__image {
-  width: 325px;
-  height: 328px;
-  border-radius: 10px;
-}
-.card__items {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
-  margin-top: 20px;
-}
+
 .footer {
   display: flex;
   justify-content: space-between;
