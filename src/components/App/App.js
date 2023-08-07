@@ -45,7 +45,7 @@ export default function App() {
             <input type="url" name="link" minLength="1" maxLength="30" />
           </label>
           <p>Select weather type:</p>
-          <div>
+          <div className="modal__input">
             <div>
               <input type="radio" id="hot" value="hot" />
               <label>Hot</label>

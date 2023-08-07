@@ -45,6 +45,11 @@
   border-radius: 4px;
   cursor: pointer;
 }
+.modal__input {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
 .modal__close-button {
   background: transparent center no-repeat url("../images/closeButton.svg");
   height: 20px;
