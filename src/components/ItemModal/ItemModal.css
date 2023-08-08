@@ -1,1 +1,7 @@
-
+.modal__content-image {
+  border-radius: 20px;
+  padding: 0;
+}
+.modal__description {
+  padding: 20px;
+}

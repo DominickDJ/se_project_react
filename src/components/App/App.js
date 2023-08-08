@@ -6,7 +6,7 @@ import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import { useEffect, useState } from "react";
 import ItemModal from "../ItemModal/ItemModal";
 import "../ItemCard/ItemCard.css";
-import { getForecastWeather, parseWeatherData } from "../utils/weatherApi";
+import { getForecastWeather, parseWeatherData } from "../../utils/weatherApi";
 export default function App() {
   const weatherTemp = 75;
   const [activeModal, setActiveModal] = useState("");
@@ -29,6 +29,7 @@ export default function App() {
       setTemp(tempurature);
     });
   }, []);
+
   return (
     <div>
       <Header onCreateModal={handleCreateModal} />
