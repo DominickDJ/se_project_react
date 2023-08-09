@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import ItemModal from "../ItemModal/ItemModal";
 import "../ItemCard/ItemCard.css";
 import { getForecastWeather, parseWeatherData } from "../../utils/weatherApi";
-import "../vendors/fonts.css";
+import "../../vendors/fonts.css";
 export default function App() {
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
@@ -25,10 +25,14 @@ export default function App() {
     setSelectedCard(card);
   };
   useEffect(() => {
-    getForecastWeather().then((data) => {
-      const tempurature = parseWeatherData(data);
-      setTemp(tempurature);
-    });
+    getForecastWeather()
+      .then((data) => {
+        const tempurature = parseWeatherData(data);
+        setTemp(tempurature);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   }, []);
 
   return (

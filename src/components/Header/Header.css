@@ -15,10 +15,11 @@
   align-items: center;
   gap: 20px;
   display: flex;
-  cursor: pointer;
 }
 .header__button {
-  cursor: pointer;
   border: none;
   background: none;
+}
+.header__button:hover {
+  cursor: pointer;
 }

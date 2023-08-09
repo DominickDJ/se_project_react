@@ -4,7 +4,7 @@ import ItemCard from "../ItemCard/ItemCard";
 import { useMemo } from "react";
 
 export default function Main({ weatherTemp, onSelectedCard }) {
-  const weatherType = useMemo(() => {
+  const getWeatherType = (weatherTemp) => {
     if (weatherTemp >= 86) {
       return "hot";
     } else if (weatherTemp >= 66 && weatherTemp <= 85) {
@@ -12,12 +12,13 @@ export default function Main({ weatherTemp, onSelectedCard }) {
     } else if (weatherTemp <= 65) {
       return "cold";
     }
-  }, [weatherTemp]);
+  };
+
+  const weatherType = getWeatherType(weatherTemp);
 
   const filterCards = defaultClothingItems.filter((item) => {
     return item.weather.toLowerCase() === weatherType;
   });
-
   return (
     <main className="main">
       <WeatherCard day={true} type="snow" weatherTemp={weatherTemp} />
