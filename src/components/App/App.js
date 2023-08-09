@@ -7,8 +7,8 @@ import { useEffect, useState } from "react";
 import ItemModal from "../ItemModal/ItemModal";
 import "../ItemCard/ItemCard.css";
 import { getForecastWeather, parseWeatherData } from "../../utils/weatherApi";
+import "../vendors/fonts.css";
 export default function App() {
-  const weatherTemp = 75;
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
   const [temp, setTemp] = useState(0);
@@ -19,6 +19,7 @@ export default function App() {
   const handleCloseModal = () => {
     setActiveModal("");
   };
+
   const handleSelectedCard = (card) => {
     setActiveModal("previewModal");
     setSelectedCard(card);
@@ -37,14 +38,16 @@ export default function App() {
       <Footer />
       {activeModal === "create" && (
         <ModalWithForm title="New Garment" onClose={handleCloseModal}>
-          <label className="modal__label">
-            <span>Name</span>
-            <input type="text" name="name" minLength="1" maxLength="30" />
-          </label>
-          <label className="modal__label">
-            <span>Image</span>
-            <input type="url" name="link" minLength="1" maxLength="30" />
-          </label>
+          <div className="modal__label-input">
+            <label className="modal__label">
+              <span>Name</span>
+              <input type="text" name="name" minLength="1" maxLength="30" />
+            </label>
+            <label className="modal__label">
+              <span>Image</span>
+              <input type="url" name="link" minLength="1" maxLength="30" />
+            </label>
+          </div>
           <p>Select weather type:</p>
           <div className="modal__input">
             <div>
