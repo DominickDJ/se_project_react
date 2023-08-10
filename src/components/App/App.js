@@ -45,15 +45,29 @@ export default function App() {
           <div className="modal__label-input">
             <label className="modal__label">
               <span>Name</span>
-              <input type="text" name="name" minLength="1" maxLength="30" />
+              <input
+                className="modal__input"
+                placeholder="Name"
+                type="text"
+                name="name"
+                minLength="1"
+                maxLength="30"
+              />
             </label>
             <label className="modal__label">
               <span>Image</span>
-              <input type="url" name="link" minLength="1" maxLength="30" />
+              <input
+                className="modal__input"
+                placeholder="Image"
+                type="url"
+                name="link"
+                minLength="1"
+                maxLength="30"
+              />
             </label>
           </div>
           <p>Select weather type:</p>
-          <div className="modal__input">
+          <div className="modal__input modal__input-radio">
             <div>
               <input type="radio" id="hot" value="hot" />
               <label>Hot</label>

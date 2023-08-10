@@ -12,7 +12,7 @@
 
 .modal__content {
   background: white;
-  padding: 34px 36px;
+  padding: 28px 28px;
   border-radius: 20px;
   position: relative;
   box-sizing: border-box;
@@ -33,6 +33,16 @@
 .modal__image {
   border-radius: 20px;
 }
+.modal__content-image {
+  min-height: 610px;
+}
+.modal__description {
+  display: flex;
+  flex-direction: column;
+  padding-left: 32px;
+  padding-top: 20px;
+  gap: 12px;
+}
 .modal__label {
   display: flex;
   flex-direction: column;
@@ -49,13 +59,13 @@
   color: #e5e5e5;
   text-align: center;
   border: 0;
-  padding: 8px, 16px, 8px, 16px;
   margin-top: 15px;
   box-sizing: border-box;
   width: 124px;
   height: 36px;
   gap: 8px;
   border-radius: 4px;
+  margin-bottom: 8px;
 }
 .modal__submit-button:hover {
   cursor: pointer;
@@ -64,17 +74,35 @@
 .modal__input {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 8px;
+  padding-bottom: 26px;
+  border: none;
+  border-bottom: 1px solid black;
+}
+.modal__input-radio {
+  border-bottom: none;
 }
 .modal__close-button {
   background: transparent center no-repeat url("../../images/closeButton.svg");
-  height: 20px;
-  width: 20px;
+  height: 16px;
+  width: 16px;
   border: none;
-
   position: absolute;
   right: 28px;
   top: 20px;
+}
+.modal__close-button_add {
+  background: transparent center no-repeat
+    url("../../images/addCloseButton.svg");
+  height: 16px;
+  width: 16px;
+  border: none;
+  position: absolute;
+  right: 28px;
+  top: 20px;
+}
+.modal__close-button_add:hover {
+  cursor: pointer;
 }
 .modal__close-button:hover {
   cursor: pointer;
