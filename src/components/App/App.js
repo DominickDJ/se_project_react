@@ -41,7 +41,11 @@ export default function App() {
       <Main weatherTemp={temp} onSelectedCard={handleSelectedCard} />
       <Footer />
       {activeModal === "create" && (
-        <ModalWithForm title="New Garment" onClose={handleCloseModal}>
+        <ModalWithForm
+          buttonText="Add Garment"
+          title="New Garment"
+          onClose={handleCloseModal}
+        >
           <div className="modal__label-input">
             <label className="modal__label">
               <span>Name</span>
@@ -69,15 +73,15 @@ export default function App() {
           <p>Select weather type:</p>
           <div className="modal__input modal__input-radio">
             <div>
-              <input type="radio" id="hot" value="hot" />
+              <input type="radio" id="hot" value="hot" name="input" />
               <label>Hot</label>
             </div>
             <div>
-              <input type="radio" id="warm" value="warm" />
+              <input type="radio" id="warm" value="warm" name="input" />
               <label>Warm</label>
             </div>
             <div>
-              <input type="radio" id="cold" value="cold" />
+              <input type="radio" id="cold" value="cold" name="input" />
               <label>Cold</label>
             </div>
           </div>

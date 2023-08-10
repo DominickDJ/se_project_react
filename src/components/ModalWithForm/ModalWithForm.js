@@ -1,7 +1,7 @@
 import "./ModalWithForm.css";
 export default function ModalWithForm({
   children,
-  buttonText = "Add garment",
+  buttonText,
   title,
   onClose,
   name,
