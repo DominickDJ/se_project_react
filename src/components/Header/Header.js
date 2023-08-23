@@ -1,3 +1,4 @@
+import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
 import "./Header.css";
 const Header = ({ onCreateModal }) => {
   const currentDate = new Date().toLocaleString("default", {
@@ -15,6 +16,7 @@ const Header = ({ onCreateModal }) => {
           <div>{currentDate}</div>
         </div>
         <div className="header__avatar-logo">
+          <ToggleSwitch />
           <div>
             <button
               className="header__button"

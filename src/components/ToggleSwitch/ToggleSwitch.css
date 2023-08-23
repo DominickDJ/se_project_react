@@ -1,0 +1,46 @@
+.toggle-switch__label {
+  display: flex;
+  position: relative;
+}
+.toggle-switch__checkbox {
+  border-radius: 25px;
+  border: 2px solid black;
+  width: 50px;
+  height: 30px;
+  appearance: none;
+}
+.switch__slider {
+  border-radius: 20px;
+  width: 30px;
+  height: 30px;
+  background-color: black;
+  color: white;
+  position: absolute;
+  text-align: center;
+  cursor: pointer;
+}
+
+.switch__slider-F {
+  top: 3px;
+  left: 25px;
+}
+.switch__slider-C {
+  top: 3px;
+  left: 5px;
+}
+.switch__temp-C {
+  position: absolute;
+  top: -7px;
+  left: 14px;
+  color: white;
+}
+.switch__temp-F {
+  position: absolute;
+  top: -7px;
+  left: 35px;
+  color: white;
+}
+.switch__active {
+  color: white;
+  font-size: 16px;
+}
