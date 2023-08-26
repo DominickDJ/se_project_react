@@ -9,6 +9,7 @@ import "../ItemCard/ItemCard.css";
 import { getForecastWeather, parseWeatherData } from "../../utils/weatherApi";
 import "../../vendors/fonts.css";
 import { CurrentTempUnitContext } from "../../contexts/CurrentTempUnitContext";
+import { Route, Switch } from "react-router-dom";
 
 export default function App() {
   const [activeModal, setActiveModal] = useState("");
@@ -36,17 +37,22 @@ export default function App() {
         console.error(error);
       });
   }, []);
-  const handleTogggleSwitchChange = () => {
+  const handleToggleSwitchChange = () => {
     setCurrentTemperatureUnit((prevUnit) => (prevUnit === "F" ? "C" : "F"));
   };
-  console.log(currentTemperatureUnit);
   return (
     <div className="page">
       <CurrentTempUnitContext.Provider
-        value={{ currentTemperatureUnit, handleTogggleSwitchChange }}
+        value={{ currentTemperatureUnit, handleToggleSwitchChange }}
       >
         <Header onCreateModal={handleCreateModal} />
-        <Main weatherTemp={temp} onSelectedCard={handleSelectedCard} />
+        <Switch>
+          <Route exact path="/">
+            <Main weatherTemp={temp} onSelectedCard={handleSelectedCard} />
+          </Route>
+          <Route path="/profile">Profile</Route>
+        </Switch>
+
         <Footer />
         {activeModal === "create" && (
           <ModalWithForm

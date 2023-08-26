@@ -1,11 +1,10 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import "./ToggleSwitch.css";
 import { CurrentTempUnitContext } from "../../contexts/CurrentTempUnitContext";
 const ToggleSwitch = () => {
   const { currentTemperatureUnit, handleToggleSwitchChange } = useContext(
     CurrentTempUnitContext
   );
-  console.log(currentTemperatureUnit);
   return (
     <label className="toggle-switch__label">
       <input

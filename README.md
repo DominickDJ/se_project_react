@@ -6,7 +6,7 @@
 
 **Recent updates**
 
-- Rendered Figma design
+- ToggleSwitch/Context
 - JSX React funtionality
 - Weather API / current weather
 - Date API / current date
