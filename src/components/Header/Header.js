@@ -1,4 +1,6 @@
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
+import { Link } from "react-router-dom";
+
 import "./Header.css";
 const Header = ({ onCreateModal }) => {
   const currentDate = new Date().toLocaleString("default", {
@@ -11,7 +13,9 @@ const Header = ({ onCreateModal }) => {
       <header className="header">
         <div className="header__logo">
           <div>
-            <img src={require("../../images/logo.svg").default} alt="logo" />
+            <Link to="/">
+              <img src={require("../../images/logo.svg").default} alt="logo" />
+            </Link>
           </div>
           <div>{currentDate}</div>
         </div>
@@ -26,7 +30,7 @@ const Header = ({ onCreateModal }) => {
               + Add Clothes
             </button>
           </div>
-          <div>User Name</div>
+          <Link to="/profile">Dominick Harper</Link>
           <div>
             <img src={require("../../images/avatar.svg").default} alt="logo" />
           </div>

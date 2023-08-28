@@ -1,4 +1,16 @@
-.modal__content-image {
-  border-radius: 20px;
-  padding: 0;
+.modal__delete-button {
+  width: 101px;
+  height: 24px;
+  position: absolute;
+  top: 20px;
+  right: 32px;
+  border: none;
+  background: none;
+  color: red;
+}
+.modal__delete-button:hover {
+  cursor: pointer;
+}
+.modal__description {
+  position: relative;
 }

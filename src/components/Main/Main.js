@@ -5,7 +5,6 @@ import { useContext } from "react";
 import { CurrentTempUnitContext } from "../../contexts/CurrentTempUnitContext";
 
 export default function Main({ weatherTemp, onSelectedCard }) {
-  debugger;
   const { currentTemperatureUnit } = useContext(CurrentTempUnitContext);
   const temp = weatherTemp?.temperature?.[currentTemperatureUnit] || 999;
 
