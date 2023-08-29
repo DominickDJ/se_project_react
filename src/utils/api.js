@@ -1,5 +1,5 @@
 const baseUrl =
-  "https://my-json-server.typicode.com/dominickDJ/se_project_react";
+  "https://my-json-server.typicode.com/DominickDJ/se_project_react";
 
 const checkServerResponse = (res) => {
   return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
@@ -30,8 +30,8 @@ export function addItems(name, imageUrl, weather) {
   });
 }
 
-export function deleteItems() {
-  return fetch(`${baseUrl}/items/:id`, {
+export function deleteItems(selectedCard) {
+  return fetch(`${baseUrl}/items/${selectedCard.id}`, {
     method: "DELETE",
   }).then((res) => {
     return checkServerResponse(res);

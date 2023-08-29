@@ -11,10 +11,11 @@ import { CurrentTempUnitContext } from "../../contexts/CurrentTempUnitContext";
 import { Route, Switch } from "react-router-dom";
 import AddItemModal from "../AddItemModal/AddItemModal";
 import { getItems, addItems, deleteItems } from "../../utils/api";
+import Profile from "../Profile/Profile";
 export default function App() {
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
-  // const [clothingItems, setClothingItems] = useState([]);
+  const [clothingItems, setClothingItems] = useState([]);
   const [temp, setTemp] = useState(0);
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
   const handleCreateModal = () => {
@@ -44,13 +45,28 @@ export default function App() {
   };
 
   const onAddItem = (values) => {
-    console.log(values);
-  };
-  //   const handleAddItemSubmit = () => {
+    addItems(values.name, values.imageUrl, values.weather)
+      .then((addedItem) => {
+        setClothingItems((prevItems) => [...prevItems, addedItem]);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
 
-  // };
+    handleCloseModal();
+  };
+
   const onDelete = (selectedCard) => {
-    deleteItems(selectedCard);
+    deleteItems(selectedCard)
+      .then(() => {
+        setClothingItems((prevItems) =>
+          prevItems.filter((item) => item.id !== selectedCard.id)
+        );
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+    handleCloseModal();
   };
   return (
     <div className="page">
@@ -62,7 +78,9 @@ export default function App() {
           <Route exact path="/">
             <Main weatherTemp={temp} onSelectedCard={handleSelectedCard} />
           </Route>
-          <Route path="/profile">Profile</Route>
+          <Route path="/profile">
+            <Profile></Profile>
+          </Route>
         </Switch>
 
         <Footer />
