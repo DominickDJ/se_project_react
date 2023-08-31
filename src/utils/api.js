@@ -1,17 +1,13 @@
 const baseUrl =
-  "https://my-json-server.typicode.com/DominickDJ/se_project_react";
+  "https://my-json-server.typicode.com/dominickDJ/se_project_react";
 
 const checkServerResponse = (res) => {
   return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
 };
 
-export function getItems(name, link) {
+export function getItems() {
   return fetch(`${baseUrl}/items`, {
     method: "GET",
-    body: JSON.stringify({
-      name: name,
-      link: link,
-    }),
   }).then((res) => {
     return checkServerResponse(res);
   });

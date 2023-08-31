@@ -12,12 +12,15 @@ import { Route, Switch } from "react-router-dom";
 import AddItemModal from "../AddItemModal/AddItemModal";
 import { getItems, addItems, deleteItems } from "../../utils/api";
 import Profile from "../Profile/Profile";
+
 export default function App() {
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
   const [clothingItems, setClothingItems] = useState([]);
   const [temp, setTemp] = useState(0);
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
+
+  //Handlers
   const handleCreateModal = () => {
     setActiveModal("create");
   };
@@ -44,6 +47,23 @@ export default function App() {
     setCurrentTemperatureUnit((prevUnit) => (prevUnit === "F" ? "C" : "F"));
   };
 
+  // const handleAddItemSubmit = (item) => {
+  //   addItems(name, imageUrl, weather).then((clothingResponse) => {
+  //     // setClothingItems([item, ...clothingItems]);
+  //     console.log("clothingResponse", clothingResponse);
+  //   });
+  // };
+
+  //API Calls
+  const onGetItems = () => {
+    getItems().then((items) => {
+      setClothingItems(items);
+    });
+  };
+  useEffect(() => {
+    onGetItems();
+  }, []);
+
   const onAddItem = (values) => {
     addItems(values.name, values.imageUrl, values.weather)
       .then((addedItem) => {
@@ -68,6 +88,7 @@ export default function App() {
       });
     handleCloseModal();
   };
+
   return (
     <div className="page">
       <CurrentTempUnitContext.Provider
@@ -76,7 +97,11 @@ export default function App() {
         <Header onCreateModal={handleCreateModal} />
         <Switch>
           <Route exact path="/">
-            <Main weatherTemp={temp} onSelectedCard={handleSelectedCard} />
+            <Main
+              weatherTemp={temp}
+              onSelectedCard={handleSelectedCard}
+              clothingItems={clothingItems}
+            />
           </Route>
           <Route path="/profile">
             <Profile></Profile>
@@ -89,6 +114,7 @@ export default function App() {
             handleCloseModal={handleCloseModal}
             isOpen={activeModal === "create"}
             onAddItem={onAddItem}
+            // handleAddItemSubmit={handleAddItemSubmit}
           />
         )}
         {activeModal === "previewModal" && (

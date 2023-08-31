@@ -3,13 +3,11 @@ import ModalWithForm from "../ModalWithForm/ModalWithForm";
 const AddItemModal = ({ handleCloseModal, onAddItem, isOpen }) => {
   const [name, setName] = useState("");
   const hanndleNameChange = (e) => {
-    console.log(e.target.value);
     setName(e.target.value);
   };
 
   const [link, setUrl] = useState("");
   const hanndleUrlChange = (e) => {
-    console.log(e.target.value);
     setUrl(e.target.value);
   };
   const handleSubmit = (e) => {

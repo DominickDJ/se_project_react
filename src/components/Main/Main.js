@@ -1,10 +1,9 @@
-import { defaultClothingItems } from "../../utils/constants";
 import WeatherCard from "../WeatherCard/WeatherCard";
 import ItemCard from "../ItemCard/ItemCard";
 import { useContext } from "react";
 import { CurrentTempUnitContext } from "../../contexts/CurrentTempUnitContext";
 
-export default function Main({ weatherTemp, onSelectedCard }) {
+export default function Main({ weatherTemp, onSelectedCard, clothingItems }) {
   const { currentTemperatureUnit } = useContext(CurrentTempUnitContext);
   const temp = weatherTemp?.temperature?.[currentTemperatureUnit] || 999;
 
@@ -20,7 +19,7 @@ export default function Main({ weatherTemp, onSelectedCard }) {
 
   const weatherType = getWeatherType(weatherTemp);
 
-  const filterCards = defaultClothingItems.filter((item) => {
+  const filterCards = clothingItems.filter((item) => {
     return item.weather.toLowerCase() === weatherType;
   });
 
@@ -30,7 +29,7 @@ export default function Main({ weatherTemp, onSelectedCard }) {
       <section className="card__section" id="cardSection">
         Today is {temp}°F / You may want to wear:
         <div className="card__items">
-          {defaultClothingItems.map((item) => (
+          {clothingItems.map((item) => (
             <ItemCard
               key={item._id}
               item={item}
