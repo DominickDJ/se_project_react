@@ -35,8 +35,7 @@ export default function App() {
   useEffect(() => {
     getForecastWeather()
       .then((data) => {
-        const tempurature = parseWeatherData(data);
-        setTemp(tempurature);
+        const tempurature = parseWeatherData(data).temperature.F;
       })
       .catch((error) => {
         console.error(error);
@@ -46,13 +45,6 @@ export default function App() {
   const handleToggleSwitchChange = () => {
     setCurrentTemperatureUnit((prevUnit) => (prevUnit === "F" ? "C" : "F"));
   };
-
-  // const handleAddItemSubmit = (item) => {
-  //   addItems(name, imageUrl, weather).then((clothingResponse) => {
-  //     // setClothingItems([item, ...clothingItems]);
-  //     console.log("clothingResponse", clothingResponse);
-  //   });
-  // };
 
   //API Calls
   const onGetItems = () => {
@@ -104,7 +96,7 @@ export default function App() {
             />
           </Route>
           <Route path="/profile">
-            <Profile></Profile>
+            <Profile onCreateModal={handleCreateModal}></Profile>
           </Route>
         </Switch>
 
@@ -114,7 +106,6 @@ export default function App() {
             handleCloseModal={handleCloseModal}
             isOpen={activeModal === "create"}
             onAddItem={onAddItem}
-            // handleAddItemSubmit={handleAddItemSubmit}
           />
         )}
         {activeModal === "previewModal" && (

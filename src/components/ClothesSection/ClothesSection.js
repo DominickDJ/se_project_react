@@ -1,6 +1,5 @@
 import React from "react";
 import "./ClothesSection.css";
-
 const ClothesSection = ({ onCreateModal }) => {
   return (
     <div className="clothes__section">
