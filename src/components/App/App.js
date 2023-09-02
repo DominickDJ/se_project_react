@@ -35,7 +35,8 @@ export default function App() {
   useEffect(() => {
     getForecastWeather()
       .then((data) => {
-        const tempurature = parseWeatherData(data).temperature.F;
+        const tempurature = parseWeatherData(data); // the mistake is here. Temperature must be a number, not object OR it can be object, but you must handle it as object
+        setTemp(tempurature);
       })
       .catch((error) => {
         console.error(error);

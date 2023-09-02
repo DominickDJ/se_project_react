@@ -4,11 +4,10 @@ import { useContext } from "react";
 import { CurrentTempUnitContext } from "../../contexts/CurrentTempUnitContext";
 export default function Main({ weatherTemp, onSelectedCard, clothingItems }) {
   const { currentTemperatureUnit } = useContext(CurrentTempUnitContext);
-  // const temp = weatherTemp?.temperature?.[currentTemperatureUnit] || 999;
-  const temp = weatherTemp;
+  const temp = weatherTemp?.temperature?.[currentTemperatureUnit] || 999;
+  // const temp = weatherTemp;
 
   const getWeatherType = (weatherTemp) => {
-    console.log(weatherTemp);
     if (weatherTemp >= 86) {
       return "hot";
     } else if (weatherTemp >= 66 && weatherTemp <= 85) {
@@ -19,7 +18,6 @@ export default function Main({ weatherTemp, onSelectedCard, clothingItems }) {
   };
 
   const weatherType = getWeatherType(weatherTemp);
-
   const filterCards = clothingItems.filter((item) => {
     return item.weather.toLowerCase() === weatherType;
   });

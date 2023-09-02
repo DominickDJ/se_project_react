@@ -27,7 +27,7 @@ export function addItems(name, imageUrl, weather) {
 }
 
 export function deleteItems(selectedCard) {
-  return fetch(`${baseUrl}/items/${selectedCard.id}`, {
+  return fetch(`${baseUrl}/items/${selectedCard._id}`, {
     method: "DELETE",
   }).then((res) => {
     return checkServerResponse(res);
