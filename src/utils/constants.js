@@ -59,3 +59,13 @@ export const weatherOptions = [
 export const latitude = 47.05;
 export const longitude = -109.43;
 export const APIkey = "504829a367e76e0ee9ee141984a6840d";
+
+export const getWeatherType = (weatherTemp) => {
+  if (weatherTemp >= 86) {
+    return "hot";
+  } else if (weatherTemp >= 66 && weatherTemp <= 85) {
+    return "warm";
+  } else if (weatherTemp <= 65) {
+    return "cold";
+  }
+};
