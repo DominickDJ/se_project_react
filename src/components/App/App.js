@@ -12,7 +12,6 @@ import { Route, Switch } from "react-router-dom";
 import AddItemModal from "../AddItemModal/AddItemModal";
 import { getItems, addItems, deleteItems } from "../../utils/api";
 import Profile from "../Profile/Profile";
-
 export default function App() {
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
@@ -97,7 +96,10 @@ export default function App() {
             />
           </Route>
           <Route path="/profile">
-            <Profile onCreateModal={handleCreateModal}></Profile>
+            <Profile
+              onCreateModal={handleCreateModal}
+              clothingItems={clothingItems}
+            ></Profile>
           </Route>
         </Switch>
 

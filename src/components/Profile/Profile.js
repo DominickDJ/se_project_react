@@ -2,12 +2,11 @@ import React from "react";
 import SideBar from "../SideBar/SideBar";
 import "./Profile.css";
 import ClothesSection from "../ClothesSection/ClothesSection";
-import ClothingList from "../ClothingList/ClothingList";
 const Profile = ({
   onCreateModal,
+  clothingItems,
   weatherTemp,
   onSelectedCard,
-  clothingItems,
 }) => {
   const user = {
     username: "User Name",
@@ -17,12 +16,12 @@ const Profile = ({
   return (
     <div className="profile">
       <SideBar user={user} />
-      <ClothesSection onCreateModal={onCreateModal} />
-      {/* <ClothingList
+      <ClothesSection
+        onCreateModal={onCreateModal}
+        clothingItems={clothingItems}
         weatherTemp={weatherTemp}
         onSelectedCard={onSelectedCard}
-        clothingItems={clothingItems}
-      /> */}
+      />
     </div>
   );
 };

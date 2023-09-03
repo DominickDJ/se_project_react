@@ -1,6 +1,16 @@
 .clothes__section {
   display: flex;
-  align-items: center;
+  flex-wrap: wrap;
   gap: 10px;
   padding-bottom: 20px;
+  margin-left: 116px;
+}
+.clothes__section-button {
+  border: none;
+  background: none;
+  padding-top: 25px;
+  color: grey;
+}
+.clothes__section-button:hover {
+  cursor: pointer;
 }
