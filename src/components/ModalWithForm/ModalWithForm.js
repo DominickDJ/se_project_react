@@ -5,7 +5,6 @@ export default function ModalWithForm({
   title,
   onClose,
   name,
-  isOpen,
   onSubmit,
 }) {
   return (

@@ -20,7 +20,6 @@ const ClothesSection = ({
         </button>
       </div>
       <ClothingList
-        weatherTemp={weatherTemp}
         onSelectedCard={onSelectedCard}
         clothingItems={clothingItems}
       />

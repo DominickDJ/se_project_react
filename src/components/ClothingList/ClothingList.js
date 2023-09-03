@@ -1,16 +1,11 @@
 import React from "react";
 import ItemCard from "../ItemCard/ItemCard";
-import { getWeatherType } from "../../utils/constants";
-const ClothingList = ({ weatherTemp, onSelectedCard, clothingItems }) => {
-  const weatherType = getWeatherType(weatherTemp?.temperature?.F);
-  const filterCards = clothingItems.filter((item) => {
-    return item.weather.toLowerCase() === weatherType;
-  });
 
+const ClothingList = ({ onSelectedCard, clothingItems }) => {
   return (
-    <section className="cl">
+    <section className="clothing__section" id="cardSection">
       <div className="card__items">
-        {filterCards.map((item) => (
+        {clothingItems.map((item) => (
           <ItemCard
             key={item._id}
             item={item}
