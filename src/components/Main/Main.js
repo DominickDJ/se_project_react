@@ -1,6 +1,6 @@
 import WeatherCard from "../WeatherCard/WeatherCard";
 import { useContext } from "react";
-import { CurrentTempUnitContext } from "../../CurrentTemperatureUnitContext/CurrentTempUnitContext";
+import { CurrentTempUnitContext } from "../../contexts/CurrentTempUnitContext";
 import ClothingList from "../ClothingList/ClothingList";
 import { getWeatherType } from "../../utils/constants";
 export default function Main({ weatherTemp, onSelectedCard, clothingItems }) {
