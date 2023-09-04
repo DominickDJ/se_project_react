@@ -1,10 +1,10 @@
 import WeatherCard from "../WeatherCard/WeatherCard";
 import { useContext } from "react";
-import { CurrentTempUnitContext } from "../../contexts/CurrentTempUnitContext";
+import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
 import ClothingList from "../ClothingList/ClothingList";
 import { getWeatherType } from "../../utils/constants";
 export default function Main({ weatherTemp, onSelectedCard, clothingItems }) {
-  const { currentTemperatureUnit } = useContext(CurrentTempUnitContext);
+  const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
   const temp = weatherTemp?.temperature?.[currentTemperatureUnit] || 999;
   const weatherType = getWeatherType(weatherTemp?.temperature?.F);
   const filterCards = clothingItems.filter((item) => {
