@@ -1,12 +1,7 @@
 import React from "react";
 import "./ClothesSection.css";
 import ClothingList from "../ClothingList/ClothingList";
-const ClothesSection = ({
-  onCreateModal,
-  clothingItems,
-  weatherTemp,
-  onSelectedCard,
-}) => {
+const ClothesSection = ({ onCreateModal, clothingItems, onSelectedCard }) => {
   return (
     <div className="clothes__section">
       <p className="clothes__section-title">Your Items</p>

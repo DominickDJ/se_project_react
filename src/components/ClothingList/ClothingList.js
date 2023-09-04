@@ -1,6 +1,6 @@
 import React from "react";
 import ItemCard from "../ItemCard/ItemCard";
-
+import "./ClothingList.css";
 const ClothingList = ({ onSelectedCard, clothingItems }) => {
   return (
     <section className="clothing__section" id="cardSection">
