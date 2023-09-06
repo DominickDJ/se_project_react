@@ -3,12 +3,12 @@ import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import "./AddItemModal.css";
 const AddItemModal = ({ handleCloseModal, onAddItem, isOpen }) => {
   const [name, setName] = useState("");
-  const hanndleNameChange = (e) => {
+  const handleNameChange = (e) => {
     setName(e.target.value);
   };
 
   const [imageUrl, setUrl] = useState("");
-  const hanndleUrlChange = (e) => {
+  const handleUrlChange = (e) => {
     setUrl(e.target.value);
   };
   const [weather, setWeather] = useState("");
@@ -36,9 +36,8 @@ const AddItemModal = ({ handleCloseModal, onAddItem, isOpen }) => {
             type="text"
             name="name"
             minLength="1"
-            maxLength="30"
             value={name}
-            onChange={hanndleNameChange}
+            onChange={handleNameChange}
           />
         </label>
         <label className="modal__label">
@@ -49,9 +48,8 @@ const AddItemModal = ({ handleCloseModal, onAddItem, isOpen }) => {
             type="url"
             name="link"
             minLength="1"
-            maxLength="30"
             value={imageUrl}
-            onChange={hanndleUrlChange}
+            onChange={handleUrlChange}
           />
         </label>
       </div>

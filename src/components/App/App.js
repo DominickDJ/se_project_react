@@ -59,7 +59,10 @@ export default function App() {
   const onAddItem = (values) => {
     addItems(values.name, values.imageUrl, values.weather)
       .then((addedItem) => {
-        setClothingItems((prevItems) => [...prevItems, addedItem]);
+        setClothingItems((prevItems) => [
+          ...prevItems,
+          { ...addedItem, ...values },
+        ]);
       })
       .catch((error) => {
         console.error(error);
@@ -97,6 +100,7 @@ export default function App() {
           </Route>
           <Route path="/profile">
             <Profile
+              onSelectedCard={handleSelectedCard}
               onCreateModal={handleCreateModal}
               clothingItems={clothingItems}
             ></Profile>
