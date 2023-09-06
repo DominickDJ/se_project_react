@@ -4,7 +4,6 @@ import "./ItemModal.css";
 const ItemModal = ({ selectedCard, onDelete, onClose }) => {
   const handleDelete = () => {
     onDelete(selectedCard);
-    onClose();
   };
 
   return (

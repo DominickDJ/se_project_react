@@ -12,17 +12,21 @@ import { Route, Switch } from "react-router-dom";
 import AddItemModal from "../AddItemModal/AddItemModal";
 import { getItems, addItems, deleteItems } from "../../utils/api";
 import Profile from "../Profile/Profile";
+import { useEscape } from "../../hooks/useEscape";
+
 export default function App() {
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
   const [clothingItems, setClothingItems] = useState([]);
   const [temp, setTemp] = useState(0);
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
+  const [isLoading, setIsLoading] = useState(false);
 
   //Handlers
   const handleCreateModal = () => {
     setActiveModal("create");
   };
+
   const handleCloseModal = () => {
     setActiveModal("");
   };
@@ -31,16 +35,6 @@ export default function App() {
     setActiveModal("previewModal");
     setSelectedCard(card);
   };
-  useEffect(() => {
-    getForecastWeather()
-      .then((data) => {
-        const tempurature = parseWeatherData(data); // the mistake is here. Temperature must be a number, not object OR it can be object, but you must handle it as object
-        setTemp(tempurature);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, []);
 
   const handleToggleSwitchChange = () => {
     setCurrentTemperatureUnit((prevUnit) => (prevUnit === "F" ? "C" : "F"));
@@ -48,27 +42,13 @@ export default function App() {
 
   //API Calls
   const onGetItems = () => {
-    getItems().then((items) => {
-      setClothingItems(items);
-    });
-  };
-  useEffect(() => {
-    onGetItems();
-  }, []);
-
-  const onAddItem = (values) => {
-    addItems(values.name, values.imageUrl, values.weather)
-      .then((addedItem) => {
-        setClothingItems((prevItems) => [
-          ...prevItems,
-          { ...addedItem, ...values },
-        ]);
+    getItems()
+      .then((items) => {
+        setClothingItems(items);
       })
       .catch((error) => {
         console.error(error);
       });
-
-    handleCloseModal();
   };
 
   const onDelete = (selectedCard) => {
@@ -77,12 +57,47 @@ export default function App() {
         setClothingItems((prevItems) =>
           prevItems.filter((item) => item.id !== selectedCard.id)
         );
+        handleCloseModal();
       })
       .catch((error) => {
         console.error(error);
       });
-    handleCloseModal();
   };
+
+  const onAddItem = (values) => {
+    setIsLoading(true);
+    addItems(values.name, values.imageUrl, values.weather)
+      .then((addedItem) => {
+        setClothingItems((prevItems) => [
+          { ...addedItem, ...values },
+          ...prevItems,
+        ]);
+        handleCloseModal();
+      })
+      .catch((error) => {
+        console.error(error);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  };
+
+  useEffect(() => {
+    getForecastWeather()
+      .then((data) => {
+        const temperature = parseWeatherData(data);
+        setTemp(temperature);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
+
+  useEscape(handleCloseModal);
+
+  useEffect(() => {
+    onGetItems();
+  }, []);
 
   return (
     <div className="page">
@@ -113,6 +128,7 @@ export default function App() {
             handleCloseModal={handleCloseModal}
             isOpen={activeModal === "create"}
             onAddItem={onAddItem}
+            buttonText={isLoading ? "Saving..." : "Add Garment"}
           />
         )}
         {activeModal === "previewModal" && (

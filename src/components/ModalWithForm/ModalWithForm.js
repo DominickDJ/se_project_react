@@ -1,11 +1,13 @@
 import "./ModalWithForm.css";
+
 export default function ModalWithForm({
   children,
-  buttonText,
   title,
+  buttonText,
   onClose,
   name,
   onSubmit,
+  isLoading,
 }) {
   return (
     <div className={`modal modal_type_${name}`}>
@@ -18,8 +20,12 @@ export default function ModalWithForm({
         <form className="modal__form" onSubmit={onSubmit}>
           <h3 className="modal_title">{title}</h3>
           {children}
-          <button type="submit" className="modal__submit-button">
-            {buttonText}
+          <button
+            type="submit"
+            className="modal__submit-button"
+            disabled={isLoading}
+          >
+            {isLoading ? "Loading..." : buttonText}
           </button>
         </form>
       </div>

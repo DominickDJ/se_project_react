@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import "./AddItemModal.css";
-const AddItemModal = ({ handleCloseModal, onAddItem, isOpen }) => {
+
+const AddItemModal = ({ handleCloseModal, onAddItem, isOpen, buttonText }) => {
   const [name, setName] = useState("");
   const handleNameChange = (e) => {
     setName(e.target.value);
@@ -11,21 +12,38 @@ const AddItemModal = ({ handleCloseModal, onAddItem, isOpen }) => {
   const handleUrlChange = (e) => {
     setUrl(e.target.value);
   };
+
   const [weather, setWeather] = useState("");
   const handleWeatherChange = (e) => {
     setWeather(e.target.value);
   };
-  const handleSubmit = (e) => {
+
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    onAddItem({ name, imageUrl, weather });
+    setIsLoading(true);
+    try {
+      await onAddItem({ name, imageUrl, weather });
+      setName("");
+      setUrl("");
+      setWeather("");
+      handleCloseModal();
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsLoading(false);
+    }
   };
+
   return (
     <ModalWithForm
-      buttonText="Add Garment"
+      buttonText={buttonText}
       title="New Garment"
       onClose={handleCloseModal}
       isOpen={isOpen}
       onSubmit={handleSubmit}
+      isLoading={isLoading}
     >
       <div className="modal__label-input">
         <label className="modal__label">

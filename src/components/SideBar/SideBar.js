@@ -1,15 +1,12 @@
 import React from "react";
+import avatarImage from "../../images/avatar.svg";
 import "./SideBar.css";
 
-const SideBar = ({}) => {
+const SideBar = () => {
   return (
     <div className="sidebar">
       <div className="sidebar__user">
-        <img
-          className="sidebar__avatar"
-          src={require("../../images/avatar.svg").default}
-          alt="logo"
-        />
+        <img className="sidebar__avatar" src={avatarImage} alt="logo" />
         <p className="sidebar__username">Dominick Harper</p>
       </div>
     </div>
