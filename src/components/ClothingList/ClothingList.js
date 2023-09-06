@@ -5,12 +5,8 @@ const ClothingList = ({ onSelectedCard, clothingItems }) => {
   return (
     <section className="clothing__section" id="cardSection">
       <div className="card__items">
-        {clothingItems.map((item) => (
-          <ItemCard
-            key={item._id}
-            item={item}
-            onSelectedCard={onSelectedCard}
-          />
+        {clothingItems.map((item, index) => (
+          <ItemCard key={index} item={item} onSelectedCard={onSelectedCard} />
         ))}
       </div>
     </section>
