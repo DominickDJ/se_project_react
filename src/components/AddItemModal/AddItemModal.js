@@ -18,22 +18,11 @@ const AddItemModal = ({ handleCloseModal, onAddItem, isOpen, buttonText }) => {
     setWeather(e.target.value);
   };
 
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading] = useState(false);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    setIsLoading(true);
-    try {
-      await onAddItem({ name, imageUrl, weather });
-      setName("");
-      setUrl("");
-      setWeather("");
-      handleCloseModal();
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setIsLoading(false);
-    }
+    onAddItem({ name, imageUrl, weather });
   };
 
   return (
