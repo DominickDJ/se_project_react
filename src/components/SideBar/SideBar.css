@@ -21,3 +21,9 @@
   line-height: 25px;
   text-wrap: nowrap;
 }
+.sidebar__edit:hover {
+  cursor: pointer;
+}
+.sidebar__logout:hover {
+  cursor: pointer;
+}

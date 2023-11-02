@@ -1,7 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import "./ClothesSection.css";
 import ClothingList from "../ClothingList/ClothingList";
+
 const ClothesSection = ({ onCreateModal, clothingItems, onSelectedCard }) => {
+  const { currentUser } = useContext(CurrentUserContext);
+
+  // Filter the clothing items to show only the ones added by the current user
+  const userClothingItems = clothingItems.filter(
+    (item) => item.owner._id === currentUser._id
+  );
+
   return (
     <div className="clothes__section">
       <p className="clothes__section-title">Your Items</p>
@@ -16,7 +25,7 @@ const ClothesSection = ({ onCreateModal, clothingItems, onSelectedCard }) => {
       </div>
       <ClothingList
         onSelectedCard={onSelectedCard}
-        clothingItems={clothingItems}
+        clothingItems={userClothingItems}
       />
     </div>
   );

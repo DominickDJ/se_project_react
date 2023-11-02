@@ -3,7 +3,12 @@ import { useContext } from "react";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
 import ClothingList from "../ClothingList/ClothingList";
 import { getWeatherType } from "../../utils/constants";
-export default function Main({ weatherTemp, onSelectedCard, clothingItems }) {
+export default function Main({
+  weatherTemp,
+  onSelectedCard,
+  clothingItems,
+  onCardLike,
+}) {
   const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
   const temp = weatherTemp?.temperature?.[currentTemperatureUnit] || 999;
   const weatherType = getWeatherType(weatherTemp?.temperature?.F);
@@ -18,6 +23,7 @@ export default function Main({ weatherTemp, onSelectedCard, clothingItems }) {
         <ClothingList
           onSelectedCard={onSelectedCard}
           clothingItems={filterCards}
+          onCardLike={onCardLike}
         />
       </section>
     </main>

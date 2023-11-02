@@ -13,6 +13,9 @@ import AddItemModal from "../AddItemModal/AddItemModal";
 import { getItems, addItems, deleteItems } from "../../utils/api";
 import Profile from "../Profile/Profile";
 import { useEscape } from "../../hooks/useEscape";
+import LoginModal from "../LoginModal/LoginModal";
+import RegisterModal from "../RegisterModal/RegisterModal";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
 export default function App() {
   const [activeModal, setActiveModal] = useState("");
@@ -21,6 +24,7 @@ export default function App() {
   const [temp, setTemp] = useState(0);
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
   const [isLoading, setIsLoading] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   //Handlers
   const handleCreateModal = () => {
@@ -99,46 +103,74 @@ export default function App() {
     onGetItems();
   }, []);
 
+  // const handleLikeClick = ({ id, isLiked, user }) => {
+  //   const token = localStorage.getItem("jwt");
+  //   isLiked
+  //     ? api
+  //         .addCardLike(id, token)
+  //         .then((updatedCard) => {
+  //           setClothingItems((cards) =>
+  //             cards.map((c) => (c._id === id ? updatedCard : c))
+  //           );
+  //         })
+  //         .catch((err) => console.log(err))
+  //     : api
+  //         .removeCardLike(id, token)
+  //         .then((updatedCard) => {
+  //           setClothingItems((cards) =>
+  //             cards.map((c) => (c._id === id ? updatedCard : c))
+  //           );
+  //         })
+  //         .catch((err) => console.log(err));
+  // };
   return (
-    <div className="page">
-      <CurrentTemperatureUnitContext.Provider
-        value={{ currentTemperatureUnit, handleToggleSwitchChange }}
-      >
-        <Header onCreateModal={handleCreateModal} />
-        <Switch>
-          <Route exact path="/">
-            <Main
-              weatherTemp={temp}
-              onSelectedCard={handleSelectedCard}
-              clothingItems={clothingItems}
-            />
-          </Route>
-          <Route path="/profile">
-            <Profile
-              onSelectedCard={handleSelectedCard}
-              onCreateModal={handleCreateModal}
-              clothingItems={clothingItems}
-            ></Profile>
-          </Route>
-        </Switch>
+    <CurrentUserContext.Provider value={isLoggedIn}>
+      <div className="page">
+        <CurrentTemperatureUnitContext.Provider
+          value={{ currentTemperatureUnit, handleToggleSwitchChange }}
+        >
+          <Header onCreateModal={handleCreateModal} />
+          <Switch>
+            <Route exact path="/">
+              <Main
+                weatherTemp={temp}
+                onSelectedCard={handleSelectedCard}
+                clothingItems={clothingItems}
+                // onCardLike={handleLikeClick}
+              />
+            </Route>
+            <Route path="/profile">
+              <Profile
+                onSelectedCard={handleSelectedCard}
+                onCreateModal={handleCreateModal}
+                clothingItems={clothingItems}
+                isLoggedIn={isLoggedIn}
+              ></Profile>
+            </Route>
+          </Switch>
 
-        <Footer />
-        {activeModal === "create" && (
-          <AddItemModal
-            handleCloseModal={handleCloseModal}
-            isOpen={activeModal === "create"}
-            onAddItem={onAddItem}
-            buttonText={isLoading ? "Saving..." : "Add Garment"}
-          />
-        )}
-        {activeModal === "previewModal" && (
-          <ItemModal
-            selectedCard={selectedCard}
-            onClose={handleCloseModal}
-            onDelete={onDelete}
-          />
-        )}
-      </CurrentTemperatureUnitContext.Provider>
-    </div>
+          <Footer />
+          {activeModal === "create" && (
+            <AddItemModal
+              handleCloseModal={handleCloseModal}
+              isOpen={activeModal === "create"}
+              onAddItem={onAddItem}
+              buttonText={isLoading ? "Saving..." : "Add Garment"}
+            />
+          )}
+          {activeModal === "previewModal" && (
+            <ItemModal
+              selectedCard={selectedCard}
+              onClose={handleCloseModal}
+              onDelete={onDelete}
+            />
+          )}
+          {activeModal === "Login" && <LoginModal onClose={handleCloseModal} />}
+          {activeModal === "RegisterModal" && (
+            <RegisterModal onClose={handleCloseModal} />
+          )}
+        </CurrentTemperatureUnitContext.Provider>
+      </div>
+    </CurrentUserContext.Provider>
   );
 }

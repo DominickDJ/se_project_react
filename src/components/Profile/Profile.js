@@ -7,6 +7,8 @@ const Profile = ({
   clothingItems,
   weatherTemp,
   onSelectedCard,
+  handleLogin,
+  handleLogout,
 }) => {
   const user = {
     username: "User Name",
@@ -15,7 +17,7 @@ const Profile = ({
 
   return (
     <div className="profile">
-      <SideBar user={user} />
+      <SideBar user={user} onLogin={handleLogin} onLogout={handleLogout} />
       <ClothesSection
         onCreateModal={onCreateModal}
         clothingItems={clothingItems}

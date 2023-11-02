@@ -17,3 +17,22 @@
   justify-content: center;
   margin-top: 20px;
 }
+.like-button {
+  background: transparent url(../../images/likeButton.svg) center no-repeat;
+  width: 18px;
+  height: 15px;
+  border: none;
+  transition: all 0.3s;
+}
+.like-button_clicked {
+  background: transparent url(../../images/likeButtonClicked.svg) center
+    no-repeat;
+  width: 18px;
+  height: 15px;
+  border: none;
+  cursor: pointer;
+}
+.like-button:hover {
+  cursor: pointer;
+  opacity: 0.5;
+}
