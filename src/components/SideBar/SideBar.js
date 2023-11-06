@@ -9,6 +9,7 @@ const SideBar = ({ isOpen, onClick, onClose }) => {
   };
 
   const [closeEditModal, setCloseEditModal] = useState(false);
+
   const handleCloseEditModal = () => {
     setCloseEditModal(false);
   };

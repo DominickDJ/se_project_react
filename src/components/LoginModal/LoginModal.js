@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import RegisterModal from "../RegisterModal/RegisterModal";
 import "./LoginModal.css";
+import "../RegisterModal/RegisterModal.css";
 
 const LoginModal = ({
   handleCloseModal,
@@ -79,11 +80,15 @@ const LoginModal = ({
               onChange={handlePasswordChange}
             />
           </label>
+          <button
+            className="redirect__submit-button"
+            onClick={handleOpenRegisterModal}
+          >
+            or Register
+          </button>
         </div>
       </ModalWithForm>
-      <button className="Login-button" onClick={handleOpenRegisterModal}>
-        Login
-      </button>
+
       {showRegisterModal && (
         <RegisterModal
           handleCloseModal={handleCloseRegisterModal}

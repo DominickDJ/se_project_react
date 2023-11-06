@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import "./RegisterModal.css";
+import LoginModal from "../LoginModal/LoginModal";
 
 const RegisterModal = ({
   handleCloseModal,
@@ -30,6 +31,7 @@ const RegisterModal = ({
 
   const [isLoading, setIsLoading] = useState(false);
 
+  const [showLoginModal, setShowLoginModal] = useState(false);
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsLoading(true);
@@ -43,6 +45,13 @@ const RegisterModal = ({
       });
   };
 
+  const handleOpenLoginModal = () => {
+    setShowLoginModal(true);
+  };
+
+  const handleCloseLoginModal = () => {
+    setShowLoginModal(false);
+  };
   return (
     <ModalWithForm
       buttonText={buttonText}
@@ -97,7 +106,14 @@ const RegisterModal = ({
             onChange={handleAvatarUrlChange}
           />
         </label>
+        {showLoginModal && (
+          <LoginModal
+            handleCloseModal={handleCloseLoginModal}
+            handleOpenLoginModal={handleOpenLoginModal}
+          />
+        )}
       </div>
+      <button className="redirect__submit-button"> or Login</button>
     </ModalWithForm>
   );
 };

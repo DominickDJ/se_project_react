@@ -16,6 +16,7 @@ import { useEscape } from "../../hooks/useEscape";
 import LoginModal from "../LoginModal/LoginModal";
 import RegisterModal from "../RegisterModal/RegisterModal";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
+import { ProtectedRoute } from "../ProtectedRoute/ProtectedRoute";
 
 export default function App() {
   const [activeModal, setActiveModal] = useState("");
@@ -27,8 +28,8 @@ export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   //Handlers
-  const handleCreateModal = () => {
-    setActiveModal("create");
+  const handleCreateModal = (modalName) => {
+    setActiveModal(modalName);
   };
 
   const handleCloseModal = () => {
@@ -139,14 +140,14 @@ export default function App() {
                 // onCardLike={handleLikeClick}
               />
             </Route>
-            <Route path="/profile">
+            <ProtectedRoute path="/profile">
               <Profile
                 onSelectedCard={handleSelectedCard}
                 onCreateModal={handleCreateModal}
                 clothingItems={clothingItems}
                 isLoggedIn={isLoggedIn}
               ></Profile>
-            </Route>
+            </ProtectedRoute>
           </Switch>
 
           <Footer />
@@ -165,9 +166,20 @@ export default function App() {
               onDelete={onDelete}
             />
           )}
-          {activeModal === "Login" && <LoginModal onClose={handleCloseModal} />}
+          {activeModal === "LoginModal" && (
+            <LoginModal
+              onCreateModal={handleCreateModal}
+              onClose={handleCloseModal}
+              buttonText="Log in"
+            />
+          )}
           {activeModal === "RegisterModal" && (
-            <RegisterModal onClose={handleCloseModal} />
+            <RegisterModal
+              onClose={handleCloseModal}
+              onCreateModal={handleCreateModal}
+              buttonText="Next"
+              // onRegister={handleRegister}
+            />
           )}
         </CurrentTemperatureUnitContext.Provider>
       </div>

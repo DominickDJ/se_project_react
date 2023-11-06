@@ -1,23 +1,36 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import SideBar from "../SideBar/SideBar";
 import "./Profile.css";
 import ClothesSection from "../ClothesSection/ClothesSection";
+
 const Profile = ({
   onCreateModal,
   clothingItems,
   weatherTemp,
   onSelectedCard,
-  handleLogin,
-  handleLogout,
 }) => {
   const user = {
     username: "User Name",
     avatar: "../../images/avatar.svg",
   };
+  const [openEditModal, setOpenEditModal] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
+
+  const handleOpenEditModal = () => {
+    setOpenEditModal(true);
+  };
+
+  const handleCloseEditModal = () => {
+    setOpenEditModal(false);
+  };
 
   return (
     <div className="profile">
-      <SideBar user={user} onLogin={handleLogin} onLogout={handleLogout} />
+      <SideBar
+        user={user}
+        onOpenEditModal={handleOpenEditModal}
+        onCloseEditModal={handleCloseEditModal}
+      />
       <ClothesSection
         onCreateModal={onCreateModal}
         clothingItems={clothingItems}
