@@ -24,7 +24,7 @@ const RegisterModal = ({
     setName(e.target.value);
   };
 
-  const [avatarUrl, setAvatarUrl] = useState("");
+  const [avatar, setAvatarUrl] = useState("");
   const handleAvatarUrlChange = (e) => {
     setAvatarUrl(e.target.value);
   };
@@ -32,10 +32,11 @@ const RegisterModal = ({
   const [isLoading, setIsLoading] = useState(false);
 
   const [showLoginModal, setShowLoginModal] = useState(false);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsLoading(true);
-    onRegister({ email, password, name, avatarUrl })
+    onRegister({ email, password, name, avatar })
       .then(() => {
         setIsLoading(false);
       })
@@ -52,6 +53,7 @@ const RegisterModal = ({
   const handleCloseLoginModal = () => {
     setShowLoginModal(false);
   };
+
   return (
     <ModalWithForm
       buttonText={buttonText}
@@ -102,7 +104,7 @@ const RegisterModal = ({
             placeholder="Avatar URL"
             type="url"
             name="avatarUrl"
-            value={avatarUrl}
+            value={avatar}
             onChange={handleAvatarUrlChange}
           />
         </label>
@@ -110,10 +112,16 @@ const RegisterModal = ({
           <LoginModal
             handleCloseModal={handleCloseLoginModal}
             handleOpenLoginModal={handleOpenLoginModal}
+            buttonText="Log in"
           />
         )}
       </div>
-      <button className="redirect__submit-button"> or Login</button>
+      <button
+        className="redirect__submit-button"
+        onClick={handleOpenLoginModal}
+      >
+        or Login
+      </button>
     </ModalWithForm>
   );
 };

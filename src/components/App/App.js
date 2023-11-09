@@ -17,6 +17,7 @@ import LoginModal from "../LoginModal/LoginModal";
 import RegisterModal from "../RegisterModal/RegisterModal";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { ProtectedRoute } from "../ProtectedRoute/ProtectedRoute";
+import { signIn, signUp } from "../../utils/auth";
 
 export default function App() {
   const [activeModal, setActiveModal] = useState("");
@@ -46,6 +47,18 @@ export default function App() {
   };
 
   //API Calls
+  const onRegister = (name, avatar, email, password) => {
+    return signUp(name, avatar, email, password).then(() => {
+      handleCloseModal();
+    });
+  };
+
+  const onLogin = (email, password) => {
+    return signIn(email, password).then(() => {
+      handleCloseModal();
+    });
+  };
+
   const onGetItems = () => {
     getItems()
       .then((items) => {
@@ -171,6 +184,7 @@ export default function App() {
               onCreateModal={handleCreateModal}
               onClose={handleCloseModal}
               buttonText="Log in"
+              onLogin={onLogin}
             />
           )}
           {activeModal === "RegisterModal" && (
@@ -178,7 +192,7 @@ export default function App() {
               onClose={handleCloseModal}
               onCreateModal={handleCreateModal}
               buttonText="Next"
-              // onRegister={handleRegister}
+              onRegister={onRegister}
             />
           )}
         </CurrentTemperatureUnitContext.Provider>

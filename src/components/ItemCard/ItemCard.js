@@ -30,9 +30,10 @@ const ItemCard = ({ item, onSelectedCard, currentUser, onCardLike }) => {
       </div>
       <div className="card__name">{item.name}</div>
       {currentUser ? (
-        <button className={itemLikeButtonClassName} onClick={handleLikeClick}>
-          Like
-        </button>
+        <button
+          className={itemLikeButtonClassName}
+          onClick={handleLikeClick}
+        ></button>
       ) : null}
     </div>
   );

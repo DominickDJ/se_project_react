@@ -36,3 +36,7 @@
   cursor: pointer;
   opacity: 0.5;
 }
+.like-button_clicked:hover {
+  cursor: pointer;
+  opacity: 0.6;
+}

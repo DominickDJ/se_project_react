@@ -94,7 +94,7 @@ const LoginModal = ({
           handleCloseModal={handleCloseRegisterModal}
           onRegister={onRegister}
           isOpen={showRegisterModal}
-          buttonText="Register"
+          buttonText="Next"
         />
       )}
     </div>
