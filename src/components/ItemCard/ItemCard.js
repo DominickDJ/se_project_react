@@ -5,9 +5,12 @@ const ItemCard = ({ item, onSelectedCard, currentUser, onCardLike }) => {
     onSelectedCard(item);
   };
 
-  const [isLiked, setIsLiked] = useState(
-    item.likes.some((id) => id === currentUser._id)
-  );
+  const [isLiked, setIsLiked] = useState(() => {
+    if (currentUser && currentUser._id) {
+      return item.likes.some((id) => id === currentUser._id);
+    }
+    return false;
+  });
 
   const handleLikeClick = () => {
     onCardLike(item);
@@ -29,7 +32,7 @@ const ItemCard = ({ item, onSelectedCard, currentUser, onCardLike }) => {
         />
       </div>
       <div className="card__name">{item.name}</div>
-      {currentUser ? (
+      {currentUser && currentUser._id ? (
         <button
           className={itemLikeButtonClassName}
           onClick={handleLikeClick}

@@ -35,3 +35,28 @@ export function deleteItems(selectedCard) {
     return checkServerResponse(res);
   });
 }
+
+export const api = {
+  addCardLike: (id, token) => {
+    return fetch(`${baseUrl}/items/${id}/like`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    }).then((res) => {
+      return checkServerResponse(res);
+    });
+  },
+  removeCardLike: (id, token) => {
+    return fetch(`${baseUrl}/items/${id}/like`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    }).then((res) => {
+      return checkServerResponse(res);
+    });
+  },
+};

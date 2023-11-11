@@ -10,7 +10,7 @@ import "../../vendors/fonts.css";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
 import { Route, Switch } from "react-router-dom";
 import AddItemModal from "../AddItemModal/AddItemModal";
-import { getItems, addItems, deleteItems } from "../../utils/api";
+import { getItems, addItems, deleteItems, api } from "../../utils/api";
 import Profile from "../Profile/Profile";
 import { useEscape } from "../../hooks/useEscape";
 import LoginModal from "../LoginModal/LoginModal";
@@ -118,26 +118,26 @@ export default function App() {
     onGetItems();
   }, []);
 
-  // const handleLikeClick = ({ id, isLiked, user }) => {
-  //   const token = localStorage.getItem("jwt");
-  //   isLiked
-  //     ? api
-  //         .addCardLike(id, token)
-  //         .then((updatedCard) => {
-  //           setClothingItems((cards) =>
-  //             cards.map((c) => (c._id === id ? updatedCard : c))
-  //           );
-  //         })
-  //         .catch((err) => console.log(err))
-  //     : api
-  //         .removeCardLike(id, token)
-  //         .then((updatedCard) => {
-  //           setClothingItems((cards) =>
-  //             cards.map((c) => (c._id === id ? updatedCard : c))
-  //           );
-  //         })
-  //         .catch((err) => console.log(err));
-  // };
+  const handleLikeClick = ({ id, isLiked, user }) => {
+    const token = localStorage.getItem("jwt");
+    isLiked
+      ? api
+          .addCardLike(id, token)
+          .then((updatedCard) => {
+            setClothingItems((cards) =>
+              cards.map((c) => (c._id === id ? updatedCard : c))
+            );
+          })
+          .catch((err) => console.log(err))
+      : api
+          .removeCardLike(id, token)
+          .then((updatedCard) => {
+            setClothingItems((cards) =>
+              cards.map((c) => (c._id === id ? updatedCard : c))
+            );
+          })
+          .catch((err) => console.log(err));
+  };
   return (
     <CurrentUserContext.Provider value={isLoggedIn}>
       <div className="page">
@@ -151,7 +151,7 @@ export default function App() {
                 weatherTemp={temp}
                 onSelectedCard={handleSelectedCard}
                 clothingItems={clothingItems}
-                // onCardLike={handleLikeClick}
+                onCardLike={handleLikeClick}
               />
             </Route>
             <ProtectedRoute path="/profile">
