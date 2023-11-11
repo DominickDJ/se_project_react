@@ -27,8 +27,9 @@ const LoginModal = ({
   const handleLogin = (e) => {
     e.preventDefault();
     setIsLoading(true);
-    onLogin({ email, password })
-      .then(() => {
+    onLogin(email, password)
+      .then((data) => {
+        console.log(data);
         setIsLoading(false);
       })
       .catch((error) => {

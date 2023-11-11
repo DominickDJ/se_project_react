@@ -49,6 +49,7 @@ export default function App() {
   //API Calls
   const onRegister = (name, avatar, email, password) => {
     return signUp(name, avatar, email, password).then(() => {
+      setIsLoggedIn(true);
       handleCloseModal();
     });
   };
