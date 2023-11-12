@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./ModalWithForm.css";
+import "./EditProfileModal.css";
 
 export default function EditProfileModal({
   children,
