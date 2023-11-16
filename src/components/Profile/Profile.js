@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import SideBar from "../SideBar/SideBar";
 import "./Profile.css";
 import ClothesSection from "../ClothesSection/ClothesSection";
@@ -14,7 +14,6 @@ const Profile = ({
     avatar: "../../images/avatar.svg",
   };
   const [openEditModal, setOpenEditModal] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
 
   const handleOpenEditModal = () => {
     setOpenEditModal(true);

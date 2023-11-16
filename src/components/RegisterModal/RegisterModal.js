@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import "./RegisterModal.css";
-import LoginModal from "../LoginModal/LoginModal";
 
 const RegisterModal = ({
-  handleCloseModal,
+  onClose,
   onRegister,
   isOpen,
   buttonText,
+  setActiveModal,
 }) => {
   const [email, setEmail] = useState("");
   const handleEmailChange = (e) => {
@@ -31,8 +31,6 @@ const RegisterModal = ({
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const [showLoginModal, setShowLoginModal] = useState(false);
-
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsLoading(true);
@@ -45,20 +43,14 @@ const RegisterModal = ({
         setIsLoading(false);
       });
   };
-
   const handleOpenLoginModal = () => {
-    setShowLoginModal(true);
+    setActiveModal("LoginModal");
   };
-
-  const handleCloseLoginModal = () => {
-    setShowLoginModal(false);
-  };
-
   return (
     <ModalWithForm
       buttonText={buttonText}
       title="Sign up"
-      onClose={handleCloseModal}
+      onClose={onClose}
       isOpen={isOpen}
       onSubmit={handleSubmit}
       isLoading={isLoading}
@@ -108,20 +100,22 @@ const RegisterModal = ({
             onChange={handleAvatarUrlChange}
           />
         </label>
-        {showLoginModal && (
-          <LoginModal
-            handleCloseModal={handleCloseLoginModal}
-            handleOpenLoginModal={handleOpenLoginModal}
-            buttonText="Log in"
-          />
-        )}
+        <div>
+          <button
+            type="submit"
+            className="modal__submit-button"
+            disabled={isLoading}
+          >
+            {isLoading ? "Loading..." : "Sign Up"}
+          </button>
+          <button
+            className="redirect__submit-button"
+            onClick={handleOpenLoginModal}
+          >
+            or Login
+          </button>
+        </div>
       </div>
-      <button
-        className="redirect__submit-button"
-        onClick={handleOpenLoginModal}
-      >
-        or Login
-      </button>
     </ModalWithForm>
   );
 };

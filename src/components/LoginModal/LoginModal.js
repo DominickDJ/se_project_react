@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
-import RegisterModal from "../RegisterModal/RegisterModal";
 import "./LoginModal.css";
 import "../RegisterModal/RegisterModal.css";
 
 const LoginModal = ({
-  handleCloseModal,
+  onClose,
   onLogin,
-  onRegister,
+  setActiveModal,
   isOpen,
   buttonText,
 }) => {
@@ -22,14 +21,12 @@ const LoginModal = ({
   };
 
   const [isLoading, setIsLoading] = useState(false);
-  const [showRegisterModal, setShowRegisterModal] = useState(false);
 
   const handleLogin = (e) => {
     e.preventDefault();
     setIsLoading(true);
     onLogin(email, password)
-      .then((data) => {
-        console.log(data);
+      .then(() => {
         setIsLoading(false);
       })
       .catch((error) => {
@@ -39,11 +36,7 @@ const LoginModal = ({
   };
 
   const handleOpenRegisterModal = () => {
-    setShowRegisterModal(true);
-  };
-
-  const handleCloseRegisterModal = () => {
-    setShowRegisterModal(false);
+    setActiveModal("RegisterModal");
   };
 
   return (
@@ -51,7 +44,7 @@ const LoginModal = ({
       <ModalWithForm
         buttonText={buttonText}
         title="Login"
-        onClose={handleCloseModal}
+        onClose={onClose}
         isOpen={isOpen}
         onSubmit={handleLogin}
         isLoading={isLoading}
@@ -81,23 +74,23 @@ const LoginModal = ({
               onChange={handlePasswordChange}
             />
           </label>
-          <button
-            className="redirect__submit-button"
-            onClick={handleOpenRegisterModal}
-          >
-            or Register
-          </button>
+          <div>
+            <button
+              type="submit"
+              className="modal__submit-button"
+              disabled={isLoading}
+            >
+              {isLoading ? "Loading..." : "Login"}
+            </button>
+            <button
+              className="redirect__submit-button"
+              onClick={handleOpenRegisterModal}
+            >
+              or Register
+            </button>
+          </div>
         </div>
       </ModalWithForm>
-
-      {showRegisterModal && (
-        <RegisterModal
-          handleCloseModal={handleCloseRegisterModal}
-          onRegister={onRegister}
-          isOpen={showRegisterModal}
-          buttonText="Next"
-        />
-      )}
     </div>
   );
 };

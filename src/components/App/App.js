@@ -8,7 +8,7 @@ import "../ItemCard/ItemCard.css";
 import { getForecastWeather, parseWeatherData } from "../../utils/weatherApi";
 import "../../vendors/fonts.css";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 import AddItemModal from "../AddItemModal/AddItemModal";
 import { getItems, addItems, deleteItems, api } from "../../utils/api";
 import Profile from "../Profile/Profile";
@@ -17,9 +17,11 @@ import LoginModal from "../LoginModal/LoginModal";
 import RegisterModal from "../RegisterModal/RegisterModal";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { ProtectedRoute } from "../ProtectedRoute/ProtectedRoute";
-import { signIn, signUp } from "../../utils/auth";
+import { signIn, signUp, checkToken } from "../../utils/auth";
 
 export default function App() {
+  // add useState currentUser and add it to the context
+  const [currentUser, setCurrentUser] = useState({});
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
   const [clothingItems, setClothingItems] = useState([]);
@@ -29,6 +31,9 @@ export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   //Handlers
+  const handleCurrentUser = () => {
+    setCurrentUser();
+  };
   const handleCreateModal = (modalName) => {
     setActiveModal(modalName);
   };
@@ -48,16 +53,28 @@ export default function App() {
 
   //API Calls
   const onRegister = (name, avatar, email, password) => {
-    return signUp(name, avatar, email, password).then(() => {
-      setIsLoggedIn(true);
-      handleCloseModal();
-    });
+    return signUp(name, avatar, email, password)
+      .then(() => {
+        setIsLoggedIn(true);
+        checkToken();
+        handleCloseModal();
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   const onLogin = (email, password) => {
-    return signIn(email, password).then(() => {
-      handleCloseModal();
-    });
+    return signIn(email, password)
+      .then((data) => {
+        setIsLoggedIn(true);
+
+        Redirect("/profile");
+        handleCloseModal();
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   const onGetItems = () => {
@@ -118,6 +135,11 @@ export default function App() {
     onGetItems();
   }, []);
 
+  useEffect(() => {
+    const token = localStorage.getItem("jwt");
+    checkToken(token);
+  }, [isLoggedIn]);
+
   const handleLikeClick = ({ id, isLiked, user }) => {
     const token = localStorage.getItem("jwt");
     isLiked
@@ -138,8 +160,9 @@ export default function App() {
           })
           .catch((err) => console.log(err));
   };
+
   return (
-    <CurrentUserContext.Provider value={isLoggedIn}>
+    <CurrentUserContext.Provider value={{ isLoggedIn, currentUser }}>
       <div className="page">
         <CurrentTemperatureUnitContext.Provider
           value={{ currentTemperatureUnit, handleToggleSwitchChange }}
@@ -186,6 +209,7 @@ export default function App() {
               onClose={handleCloseModal}
               buttonText="Log in"
               onLogin={onLogin}
+              setActiveModal={setActiveModal}
             />
           )}
           {activeModal === "RegisterModal" && (
@@ -194,6 +218,7 @@ export default function App() {
               onCreateModal={handleCreateModal}
               buttonText="Next"
               onRegister={onRegister}
+              setActiveModal={setActiveModal}
             />
           )}
         </CurrentTemperatureUnitContext.Provider>
