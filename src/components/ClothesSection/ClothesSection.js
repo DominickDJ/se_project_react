@@ -18,7 +18,9 @@ const ClothesSection = ({ onCreateModal, clothingItems, onSelectedCard }) => {
         <button
           className="clothes__section-button"
           type="text"
-          onClick={onCreateModal}
+          onClick={() => {
+            onCreateModal("create");
+          }}
         >
           + Add New
         </button>

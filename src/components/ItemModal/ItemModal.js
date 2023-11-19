@@ -2,12 +2,12 @@ import React, { useContext } from "react";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import "./ItemModal.css";
 
-const ItemModal = ({ selectedCard, onDelete, onClose }) => {
+const ItemModal = ({ selectedCard, onClose, setActiveModal }) => {
   const { currentUser } = useContext(CurrentUserContext);
   const isOwn = selectedCard.owner._id === currentUser._id;
 
-  const handleDelete = () => {
-    onDelete(selectedCard);
+  const handleOpenDeleteModal = () => {
+    setActiveModal("ConfirmModal");
   };
 
   const itemDeleteButtonClassName = `item__delete-button ${
@@ -30,7 +30,10 @@ const ItemModal = ({ selectedCard, onDelete, onClose }) => {
         <div className="modal__description">
           <div>{selectedCard.name}</div>
           <div>{selectedCard.weather}</div>
-          <button className={itemDeleteButtonClassName} onClick={handleDelete}>
+          <button
+            className={itemDeleteButtonClassName}
+            onClick={handleOpenDeleteModal}
+          >
             Delete Item
           </button>
         </div>

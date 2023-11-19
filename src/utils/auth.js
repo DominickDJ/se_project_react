@@ -35,13 +35,25 @@ export function signIn(email, password) {
 
 export function checkToken(token) {
   return fetch(`${baseUrl}/users/me`, {
-    method: "POST",
+    method: "GET",
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
+  }).then((res) => {
+    return checkServerResponse(res);
   });
-  // .then((res) => {
-  //   return checkServerResponse(res);
-  // });
+}
+
+export function editProfile(token, name, avatar) {
+  return fetch(`${baseUrl}/users/me`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(name, avatar),
+  }).then((res) => {
+    return checkServerResponse(res);
+  });
 }

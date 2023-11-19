@@ -16,12 +16,20 @@ const Header = ({ onCreateModal }) => {
 
   const renderAvatar = () => {
     if (currentUser && currentUser.avatar) {
-      return <img src={currentUser.avatar} alt="avatar" />;
+      return (
+        <img
+          className="header__avatar-logo"
+          src={currentUser.avatar}
+          alt="avatar"
+        />
+      );
     } else if (currentUser && currentUser.name) {
       const initials = currentUser.name.charAt(0).toUpperCase();
       return <div className="header__avatar-placeholder">{initials}</div>;
     } else {
-      return <img src={avatarImage} alt="avatar" />;
+      return (
+        <img className="header__avatar-logo" src={avatarImage} alt="avatar" />
+      );
     }
   };
 

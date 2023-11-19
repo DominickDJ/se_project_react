@@ -14,3 +14,12 @@
 .modal__description {
   position: relative;
 }
+.item__delete-button {
+  color: red;
+}
+.item__delete-button_visible {
+  visibility: visible;
+}
+.item__delete-button_hidden {
+  visibility: hidden;
+}

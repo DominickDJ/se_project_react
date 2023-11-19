@@ -1,52 +1,60 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import avatarImage from "../../images/avatar.svg";
 import "./SideBar.css";
-
-const SideBar = ({ isOpen, onClick, onClose }) => {
-  const [openEditModal, setOpenEditModal] = useState(false);
-  const handleOpenEditModal = () => {
-    setOpenEditModal(true);
-  };
-
-  const [closeEditModal, setCloseEditModal] = useState(false);
-
-  const handleCloseEditModal = () => {
-    setCloseEditModal(false);
-  };
-
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
+const SideBar = ({ setActiveModal, onCreateModal }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
 
-  const handleLogin = () => {
-    setIsLoggedIn(true);
+  const handleOpenEditModal = () => {
+    setActiveModal("EditProfileModal");
   };
 
   const handleLogout = () => {
     localStorage.removeItem("token");
-    setIsLoggedIn(false);
+    setIsLoggedIn(false)
+      .then(() => {})
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    setIsLoggedIn(!!token);
-  }, []);
-
+  const { currentUser } = useContext(CurrentUserContext);
+  const renderAvatar = () => {
+    if (currentUser && currentUser.avatar) {
+      return (
+        <img
+          className="header__avatar-logo"
+          src={currentUser.avatar}
+          alt="avatar"
+        />
+      );
+    } else if (currentUser && currentUser.name) {
+      const initials = currentUser.name.charAt(0).toUpperCase();
+      return <div className="header__avatar-placeholder">{initials}</div>;
+    } else {
+      return (
+        <img className="header__avatar-logo" src={avatarImage} alt="avatar" />
+      );
+    }
+  };
   return (
     <div className="sidebar">
       <div className="sidebar__user">
-        <img className="sidebar__avatar" src={avatarImage} alt="logo" />
-        <p className="sidebar__username">Dominick Harper</p>
+        <img className="header__avatar-logo" src={renderAvatar} alt="logo" />
+        <p className="sidebar__username" src={currentUser}></p>
       </div>
-      <div
+      <button
         className="sidebar__edit"
-        value={openEditModal}
-        onClose={handleCloseEditModal}
-        onClick={handleOpenEditModal}
+        type="text"
+        onClick={() => {
+          onCreateModal("EditProfileModal");
+        }}
       >
         Change profile data
-      </div>
-      <div className="sidebar__logout" onClick={handleLogout}>
+      </button>
+      <button type="text" className="sidebar__logout" onClick={handleLogout}>
         Log out
-      </div>
+      </button>
     </div>
   );
 };

@@ -91,7 +91,14 @@ const AddItemModal = ({ handleCloseModal, onAddItem, isOpen, buttonText }) => {
             onChange={handleWeatherChange}
           />
           <label>Cold</label>
-        </div>
+        </div>{" "}
+        <button
+          type="submit"
+          className="modal__submit-button"
+          disabled={isLoading}
+        >
+          {isLoading ? "Loading..." : "Add Garment"}
+        </button>
       </div>
     </ModalWithForm>
   );

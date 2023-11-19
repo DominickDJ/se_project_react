@@ -83,6 +83,7 @@ const LoginModal = ({
               {isLoading ? "Loading..." : "Login"}
             </button>
             <button
+              type="text"
               className="redirect__submit-button"
               onClick={handleOpenRegisterModal}
             >

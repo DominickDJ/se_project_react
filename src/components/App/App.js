@@ -8,7 +8,7 @@ import "../ItemCard/ItemCard.css";
 import { getForecastWeather, parseWeatherData } from "../../utils/weatherApi";
 import "../../vendors/fonts.css";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
-import { Route, Switch, Redirect } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import AddItemModal from "../AddItemModal/AddItemModal";
 import { getItems, addItems, deleteItems, api } from "../../utils/api";
 import Profile from "../Profile/Profile";
@@ -18,6 +18,8 @@ import RegisterModal from "../RegisterModal/RegisterModal";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { ProtectedRoute } from "../ProtectedRoute/ProtectedRoute";
 import { signIn, signUp, checkToken } from "../../utils/auth";
+import EditProfileModal from "../EditProfileModal/EditProfileModal";
+import ConfirmModal from "../ConfirmModal/ConfirmModal";
 
 export default function App() {
   // add useState currentUser and add it to the context
@@ -31,8 +33,8 @@ export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   //Handlers
-  const handleCurrentUser = () => {
-    setCurrentUser();
+  const handleCurrentUser = (data) => {
+    setCurrentUser(data);
   };
   const handleCreateModal = (modalName) => {
     setActiveModal(modalName);
@@ -68,8 +70,6 @@ export default function App() {
     return signIn(email, password)
       .then((data) => {
         setIsLoggedIn(true);
-
-        Redirect("/profile");
         handleCloseModal();
       })
       .catch((error) => {
@@ -137,7 +137,12 @@ export default function App() {
 
   useEffect(() => {
     const token = localStorage.getItem("jwt");
-    checkToken(token);
+    checkToken(token)
+      .then((data) => {
+        setIsLoggedIn(true);
+        handleCurrentUser(data);
+      })
+      .catch(console.error);
   }, [isLoggedIn]);
 
   const handleLikeClick = ({ id, isLiked, user }) => {
@@ -186,8 +191,24 @@ export default function App() {
               ></Profile>
             </ProtectedRoute>
           </Switch>
-
           <Footer />
+          {activeModal === "EditProfileModal" && (
+            <EditProfileModal
+              setActiveModal={setActiveModal}
+              onClose={handleCloseModal}
+              onCreateModal={handleCreateModal}
+              isOpen={activeModal === "EditProfileModal"}
+              buttonText={isLoading ? "Saving..." : "Edit Profile"}
+            />
+          )}
+          {activeModal === "ConfirmModal" && (
+            <ConfirmModal
+              handleCloseModal={handleCloseModal}
+              isOpen={activeModal === "ConfirmModal"}
+              onDelete={onDelete}
+              onClose={handleCloseModal}
+            />
+          )}
           {activeModal === "create" && (
             <AddItemModal
               handleCloseModal={handleCloseModal}
@@ -197,11 +218,7 @@ export default function App() {
             />
           )}
           {activeModal === "previewModal" && (
-            <ItemModal
-              selectedCard={selectedCard}
-              onClose={handleCloseModal}
-              onDelete={onDelete}
-            />
+            <ItemModal selectedCard={selectedCard} onClose={handleCloseModal} />
           )}
           {activeModal === "LoginModal" && (
             <LoginModal

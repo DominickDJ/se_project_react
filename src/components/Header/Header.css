@@ -15,6 +15,10 @@
   align-items: center;
   gap: 20px;
   display: flex;
+  border-radius: 50%;
+  object-fit: cover;
+  background-position: center;
+  height: 40px;
 }
 .header__button {
   border: none;
