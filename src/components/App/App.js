@@ -57,7 +57,6 @@ export default function App() {
     return signUp(name, avatar, email, password)
       .then(() => {
         setIsLoggedIn(true);
-        checkToken();
         handleCloseModal();
       })
       .catch((error) => {
@@ -148,12 +147,14 @@ export default function App() {
 
   useEffect(() => {
     const token = localStorage.getItem("jwt");
-    checkToken(token)
-      .then((data) => {
-        setIsLoggedIn(true);
-        handleCurrentUser(data);
-      })
-      .catch(console.error);
+    if (token) {
+      checkToken(token)
+        .then((data) => {
+          setIsLoggedIn(true);
+          handleCurrentUser(data);
+        })
+        .catch(console.error);
+    }
   }, [isLoggedIn]);
 
   const handleLikeClick = ({ id, isLiked, user }) => {
