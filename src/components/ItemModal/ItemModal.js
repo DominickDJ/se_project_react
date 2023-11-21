@@ -1,44 +1,44 @@
-import React, { useContext } from "react";
-import { CurrentUserContext } from "../../contexts/CurrentUserContext";
+import React from "react";
+
 import "./ItemModal.css";
+import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
-const ItemModal = ({ selectedCard, onClose, setActiveModal }) => {
-  const { currentUser } = useContext(CurrentUserContext);
-  const isOwn = selectedCard.owner._id === currentUser._id;
-
+const ItemModal = ({
+  selectedCard,
+  setActiveModal,
+  isOpen,
+  buttonText,
+  handleCloseModal,
+  onClose,
+}) => {
   const handleOpenDeleteModal = () => {
     setActiveModal("ConfirmModal");
   };
 
-  const itemDeleteButtonClassName = `item__delete-button ${
-    isOwn ? "item__delete-button_visible" : "item__delete-button_hidden"
-  }`;
-
   return (
-    <div className={`modal`}>
-      <div className="modal__content modal__content-image">
-        <button
-          className="modal__close-button"
-          type="button"
-          onClick={onClose}
-        ></button>
-        <img
-          className="modal__image"
-          src={selectedCard.imageUrl}
-          alt="modalImage"
-        />
-        <div className="modal__description">
-          <div>{selectedCard.name}</div>
-          <div>{selectedCard.weather}</div>
-          <button
-            className={itemDeleteButtonClassName}
-            onClick={handleOpenDeleteModal}
-          >
-            Delete Item
-          </button>
-        </div>
+    <ModalWithForm
+      buttonText={buttonText}
+      handleCloseModal={handleCloseModal}
+      isOpen={isOpen}
+      onClose={onClose}
+    >
+      <img
+        className="modal__image"
+        src={selectedCard.imageUrl}
+        alt="modalImage"
+      />
+      <div className="modal__description">
+        <div>{selectedCard.name}</div>
+        <div>{selectedCard.weather}</div>
       </div>
-    </div>
+      <button
+        onClick={handleOpenDeleteModal}
+        onClose={handleCloseModal}
+        className="item__delete-button"
+      >
+        Delete
+      </button>
+    </ModalWithForm>
   );
 };
 

@@ -1,24 +1,17 @@
 import React, { useState, useContext } from "react";
 import avatarImage from "../../images/avatar.svg";
 import "./SideBar.css";
+import "../Header/Header.css";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
-const SideBar = ({ setActiveModal, onCreateModal }) => {
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
-
-  const handleOpenEditModal = () => {
-    setActiveModal("EditProfileModal");
-  };
+const SideBar = ({ onCreateModal, setIsLoggedIn }) => {
+  const { currentUser, setCurrentUser, isLoggedIn } =
+    useContext(CurrentUserContext);
 
   const handleLogout = () => {
-    localStorage.removeItem("token");
-    setIsLoggedIn(false)
-      .then(() => {})
-      .catch((error) => {
-        console.error(error);
-      });
+    localStorage.removeItem("jwt");
+    setIsLoggedIn(false);
   };
 
-  const { currentUser } = useContext(CurrentUserContext);
   const renderAvatar = () => {
     if (currentUser && currentUser.avatar) {
       return (
@@ -33,28 +26,30 @@ const SideBar = ({ setActiveModal, onCreateModal }) => {
       return <div className="header__avatar-placeholder">{initials}</div>;
     } else {
       return (
-        <img className="header__avatar-logo" src={avatarImage} alt="avatar" />
+        <img className="header__avatar-logo" alt="avatar" src={avatarImage} />
       );
     }
   };
   return (
     <div className="sidebar">
       <div className="sidebar__user">
-        <img className="header__avatar-logo" src={renderAvatar} alt="logo" />
-        <p className="sidebar__username" src={currentUser}></p>
+        <div> {renderAvatar()}</div>
+        <p className="sidebar__username">{currentUser.name}</p>
       </div>
-      <button
-        className="sidebar__edit"
-        type="text"
-        onClick={() => {
-          onCreateModal("EditProfileModal");
-        }}
-      >
-        Change profile data
-      </button>
-      <button type="text" className="sidebar__logout" onClick={handleLogout}>
-        Log out
-      </button>
+      <div className="sidebar__buttons">
+        <button
+          className="sidebar__edit"
+          type="text"
+          onClick={() => {
+            onCreateModal("EditProfileModal");
+          }}
+        >
+          Change profile data
+        </button>
+        <button type="text" className="sidebar__logout" onClick={handleLogout}>
+          Log out
+        </button>
+      </div>
     </div>
   );
 };

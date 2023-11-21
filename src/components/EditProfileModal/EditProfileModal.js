@@ -1,24 +1,21 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "../ModalWithForm/ModalWithForm.css";
 import "./EditProfileModal.css";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import { editProfile } from "../../utils/auth";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
 export default function EditProfileModal({
-  children,
+  onSubmit,
   onClose,
   buttonText,
-  user,
   isOpen,
-  setActiveModal,
 }) {
-  const [name, setName] = useState(user.name);
-  const [avatar, setAvatar] = useState(user.avatar);
+  const { currentUser } = useContext(CurrentUserContext);
+  const [name, setName] = useState(currentUser.name);
+  const [avatar, setAvatar] = useState(currentUser.avatar);
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleOpenEditModal = () => {
-    setActiveModal("EditProfileModal");
-  };
   const handleNameChange = (e) => {
     setName(e.target.value);
   };
@@ -30,9 +27,10 @@ export default function EditProfileModal({
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsLoading(true);
-    editProfile(name, avatar)
+    onSubmit(name, avatar)
       .then(() => {
         setIsLoading(false);
+        onClose();
       })
       .catch((error) => {
         console.error(error);
@@ -50,36 +48,37 @@ export default function EditProfileModal({
         onSubmit={handleSubmit}
         isLoading={isLoading}
       >
-        <div className="modal editProfileModal">
-          <div className="modal__content">
+        <div className="modal__label-input">
+          <div className="modal__label">
+            <label>
+              <span> Name*</span>
+              <input
+                className="modal__input"
+                placeholder="Name"
+                minLength="1"
+                type="text"
+                value={name}
+                onChange={handleNameChange}
+              />
+            </label>
+            <label>
+              <span>Avatar</span>
+              <input
+                className="modal__input"
+                placeholder="Avatar"
+                minLength="1"
+                type="text"
+                value={avatar}
+                onChange={handleAvatarChange}
+              />
+            </label>
             <button
-              className="modal__close-button_add"
-              type="button"
-              onClick={onClose}
-            ></button>
-            <form className="modal__form">
-              <h3 className="modal_title">Change Profile Data</h3>
-              <label>
-                Name*
-                <input type="text" value={name} onChange={handleNameChange} />
-              </label>
-              <label>
-                Avatar
-                <input
-                  type="text"
-                  value={avatar}
-                  onChange={handleAvatarChange}
-                />
-              </label>
-              {children}
-              <button
-                type="submit"
-                className="modal__submit-button"
-                disabled={isLoading}
-              >
-                {isLoading ? "Loading..." : "Save changes"}
-              </button>
-            </form>
+              type="submit"
+              className="modal__submit-button"
+              disabled={isLoading}
+            >
+              {isLoading ? "Loading..." : "Save changes"}
+            </button>
           </div>
         </div>
       </ModalWithForm>

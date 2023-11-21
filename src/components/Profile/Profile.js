@@ -8,6 +8,7 @@ const Profile = ({
   clothingItems,
   weatherTemp,
   onSelectedCard,
+  setIsLoggedIn,
 }) => {
   const user = {
     username: "User Name",
@@ -27,8 +28,10 @@ const Profile = ({
     <div className="profile">
       <SideBar
         user={user}
+        setIsLoggedIn={setIsLoggedIn}
         onOpenEditModal={handleOpenEditModal}
         onCloseEditModal={handleCloseEditModal}
+        onCreateModal={onCreateModal}
       />
       <ClothesSection
         onCreateModal={onCreateModal}

@@ -5,10 +5,9 @@ import ClothingList from "../ClothingList/ClothingList";
 
 const ClothesSection = ({ onCreateModal, clothingItems, onSelectedCard }) => {
   const { currentUser } = useContext(CurrentUserContext);
-
   // Filter the clothing items to show only the ones added by the current user
   const userClothingItems = clothingItems.filter(
-    (item) => item.owner._id === currentUser._id
+    (item) => item.owner === currentUser._id
   );
 
   return (

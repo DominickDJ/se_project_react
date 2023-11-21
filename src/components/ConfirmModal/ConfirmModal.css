@@ -1,0 +1,33 @@
+.cancel-button {
+  border: none;
+  background: none;
+  font-weight: 700;
+}
+.cancel-button:hover {
+  opacity: 0.6;
+  cursor: pointer;
+}
+.modal__confirm-button {
+  border: none;
+  background: none;
+  font-weight: 700;
+  color: #ff4d00;
+}
+.modal__confirm-button:hover {
+  cursor: pointer;
+  opacity: 0.6;
+}
+.modal__confirm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding-bottom: 15px;
+}
+.modal__confirm-title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 40px;
+  font-weight: 700;
+}

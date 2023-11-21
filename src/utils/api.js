@@ -12,11 +12,12 @@ export function getItems() {
   });
 }
 
-export function addItems(name, imageUrl, weather) {
+export function addItems(name, imageUrl, weather, token) {
   return fetch(`${baseUrl}/items`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify({
       name: name,
@@ -28,9 +29,12 @@ export function addItems(name, imageUrl, weather) {
   });
 }
 
-export function deleteItems(selectedCard) {
-  return fetch(`${baseUrl}/items/${selectedCard.id}`, {
+export function deleteItems(selectedCard, token) {
+  return fetch(`${baseUrl}/items/${selectedCard.owner}`, {
     method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
   }).then((res) => {
     return checkServerResponse(res);
   });
@@ -39,7 +43,7 @@ export function deleteItems(selectedCard) {
 export const api = {
   addCardLike: (id, token) => {
     return fetch(`${baseUrl}/items/${id}/like`, {
-      method: "POST",
+      method: "PUT",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,

@@ -1,8 +1,8 @@
-.modal__delete-button {
+.item__delete-button {
   width: 101px;
   height: 24px;
   position: absolute;
-  top: 20px;
+  bottom: 54px;
   right: 32px;
   border: none;
   background: none;
@@ -14,12 +14,8 @@
 .modal__description {
   position: relative;
 }
-.item__delete-button {
-  color: red;
-}
-.item__delete-button_visible {
-  visibility: visible;
-}
-.item__delete-button_hidden {
-  visibility: hidden;
+
+.item__delete-button:hover {
+  opacity: 0.6;
+  cursor: pointer;
 }

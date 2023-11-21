@@ -17,12 +17,11 @@ import LoginModal from "../LoginModal/LoginModal";
 import RegisterModal from "../RegisterModal/RegisterModal";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { ProtectedRoute } from "../ProtectedRoute/ProtectedRoute";
-import { signIn, signUp, checkToken } from "../../utils/auth";
+import { signIn, signUp, checkToken, editProfile } from "../../utils/auth";
 import EditProfileModal from "../EditProfileModal/EditProfileModal";
 import ConfirmModal from "../ConfirmModal/ConfirmModal";
 
 export default function App() {
-  // add useState currentUser and add it to the context
   const [currentUser, setCurrentUser] = useState({});
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
@@ -59,6 +58,17 @@ export default function App() {
       .then(() => {
         setIsLoggedIn(true);
         checkToken();
+        handleCloseModal();
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+  const onSubmit = (name, avatar) => {
+    const token = localStorage.getItem("jwt");
+    return editProfile(token, name, avatar)
+      .then((name, avatar) => {
+        setCurrentUser(name, avatar);
         handleCloseModal();
       })
       .catch((error) => {
@@ -102,7 +112,8 @@ export default function App() {
 
   const onAddItem = (values) => {
     setIsLoading(true);
-    addItems(values.name, values.imageUrl, values.weather)
+    const token = localStorage.getItem("jwt");
+    addItems(values.name, values.imageUrl, values.weather, token)
       .then((addedItem) => {
         setClothingItems((prevItems) => [
           { ...addedItem, ...values },
@@ -167,7 +178,9 @@ export default function App() {
   };
 
   return (
-    <CurrentUserContext.Provider value={{ isLoggedIn, currentUser }}>
+    <CurrentUserContext.Provider
+      value={{ isLoggedIn, currentUser, setCurrentUser }}
+    >
       <div className="page">
         <CurrentTemperatureUnitContext.Provider
           value={{ currentTemperatureUnit, handleToggleSwitchChange }}
@@ -187,6 +200,7 @@ export default function App() {
                 onSelectedCard={handleSelectedCard}
                 onCreateModal={handleCreateModal}
                 clothingItems={clothingItems}
+                setIsLoggedIn={setIsLoggedIn}
                 isLoggedIn={isLoggedIn}
               ></Profile>
             </ProtectedRoute>
@@ -195,6 +209,7 @@ export default function App() {
           {activeModal === "EditProfileModal" && (
             <EditProfileModal
               setActiveModal={setActiveModal}
+              onSubmit={onSubmit}
               onClose={handleCloseModal}
               onCreateModal={handleCreateModal}
               isOpen={activeModal === "EditProfileModal"}
@@ -203,6 +218,7 @@ export default function App() {
           )}
           {activeModal === "ConfirmModal" && (
             <ConfirmModal
+              buttonText={isLoading ? "Deleting..." : "Delete Item"}
               handleCloseModal={handleCloseModal}
               isOpen={activeModal === "ConfirmModal"}
               onDelete={onDelete}
@@ -218,7 +234,13 @@ export default function App() {
             />
           )}
           {activeModal === "previewModal" && (
-            <ItemModal selectedCard={selectedCard} onClose={handleCloseModal} />
+            <ItemModal
+              isOpen={activeModal === "ItemModal"}
+              selectedCard={selectedCard}
+              handleCloseModal={handleCloseModal}
+              setActiveModal={setActiveModal}
+              onClose={handleCloseModal}
+            />
           )}
           {activeModal === "LoginModal" && (
             <LoginModal

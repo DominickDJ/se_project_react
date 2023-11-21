@@ -31,13 +31,18 @@ const ItemCard = ({ item, onSelectedCard, currentUser, onCardLike }) => {
           src={item.imageUrl}
         />
       </div>
-      <div className="card__name">{item.name}</div>
-      {currentUser && currentUser._id ? (
+      <div className="card__description-like">
+        <div className="card__name">{item.name}</div>
         <button
-          className={itemLikeButtonClassName}
+          // className={itemLikeButtonClassName}
+          className="like-button"
           onClick={handleLikeClick}
         ></button>
-      ) : null}
+      </div>
+
+      {/* {currentUser && currentUser._id ? (
+        
+      ) : null} */}
     </div>
   );
 };

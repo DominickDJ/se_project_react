@@ -52,7 +52,7 @@ export function editProfile(token, name, avatar) {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify(name, avatar),
+    body: JSON.stringify({ name, avatar }),
   }).then((res) => {
     return checkServerResponse(res);
   });

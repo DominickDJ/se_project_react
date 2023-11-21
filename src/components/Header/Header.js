@@ -12,10 +12,10 @@ const Header = ({ onCreateModal }) => {
     day: "numeric",
   });
 
-  const { currentUser } = useContext(CurrentUserContext);
+  const { currentUser, isLoggedIn } = useContext(CurrentUserContext);
 
   const renderAvatar = () => {
-    if (currentUser && currentUser.avatar) {
+    if (isLoggedIn && currentUser && currentUser.avatar) {
       return (
         <img
           className="header__avatar-logo"
@@ -23,7 +23,7 @@ const Header = ({ onCreateModal }) => {
           alt="avatar"
         />
       );
-    } else if (currentUser && currentUser.name) {
+    } else if (isLoggedIn && currentUser && currentUser.name) {
       const initials = currentUser.name.charAt(0).toUpperCase();
       return <div className="header__avatar-placeholder">{initials}</div>;
     } else {
@@ -34,7 +34,7 @@ const Header = ({ onCreateModal }) => {
   };
 
   const renderHeaderContent = () => {
-    if (currentUser && currentUser.name) {
+    if (isLoggedIn && currentUser && currentUser.name) {
       return (
         <>
           <ToggleSwitch />
