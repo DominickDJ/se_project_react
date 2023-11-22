@@ -30,7 +30,7 @@ export function addItems(name, imageUrl, weather, token) {
 }
 
 export function deleteItems(selectedCard, token) {
-  return fetch(`${baseUrl}/items/${selectedCard.owner}`, {
+  return fetch(`${baseUrl}/items/${selectedCard._id}`, {
     method: "DELETE",
     headers: {
       Authorization: `Bearer ${token}`,

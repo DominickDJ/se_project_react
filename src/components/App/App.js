@@ -96,11 +96,12 @@ export default function App() {
       });
   };
 
-  const onDelete = (selectedCard) => {
-    deleteItems(selectedCard)
+  const onDelete = () => {
+    const token = localStorage.getItem("jwt");
+    deleteItems(selectedCard, token)
       .then(() => {
         setClothingItems((prevItems) =>
-          prevItems.filter((item) => item.id !== selectedCard.id)
+          prevItems.filter((item) => item._id !== selectedCard._id)
         );
         handleCloseModal();
       })
@@ -193,7 +194,7 @@ export default function App() {
                 weatherTemp={temp}
                 onSelectedCard={handleSelectedCard}
                 clothingItems={clothingItems}
-                onCardLike={handleLikeClick}
+                handleLikeClick={handleLikeClick}
               />
             </Route>
             <ProtectedRoute path="/profile">
@@ -241,6 +242,8 @@ export default function App() {
               handleCloseModal={handleCloseModal}
               setActiveModal={setActiveModal}
               onClose={handleCloseModal}
+              isLoggedIn={isLoggedIn}
+              currentUser={currentUser}
             />
           )}
           {activeModal === "LoginModal" && (
@@ -250,6 +253,7 @@ export default function App() {
               buttonText="Log in"
               onLogin={onLogin}
               setActiveModal={setActiveModal}
+              currentUser={currentUser}
             />
           )}
           {activeModal === "RegisterModal" && (

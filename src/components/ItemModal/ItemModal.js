@@ -1,5 +1,4 @@
 import React from "react";
-
 import "./ItemModal.css";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
@@ -10,9 +9,26 @@ const ItemModal = ({
   buttonText,
   handleCloseModal,
   onClose,
+  isLoggedIn,
+  currentUser,
 }) => {
   const handleOpenDeleteModal = () => {
     setActiveModal("ConfirmModal");
+  };
+
+  const renderDeleteButton = () => {
+    if (currentUser._id === selectedCard.owner) {
+      return (
+        <button
+          onClick={handleOpenDeleteModal}
+          onClose={handleCloseModal}
+          className="item__delete-button"
+        >
+          Delete
+        </button>
+      );
+    }
+    return null;
   };
 
   return (
@@ -23,7 +39,7 @@ const ItemModal = ({
       onClose={onClose}
     >
       <img
-        className="modal__image"
+        className="modal__image image_preview"
         src={selectedCard.imageUrl}
         alt="modalImage"
       />
@@ -31,13 +47,7 @@ const ItemModal = ({
         <div>{selectedCard.name}</div>
         <div>{selectedCard.weather}</div>
       </div>
-      <button
-        onClick={handleOpenDeleteModal}
-        onClose={handleCloseModal}
-        className="item__delete-button"
-      >
-        Delete
-      </button>
+      {renderDeleteButton()}
     </ModalWithForm>
   );
 };
