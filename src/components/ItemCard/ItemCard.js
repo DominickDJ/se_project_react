@@ -30,7 +30,7 @@ const ItemCard = ({ item, onSelectedCard, currentUser }) => {
           src={item.imageUrl}
         />
       </div>
-      <div className="card__description-like">
+      <div className="card__description-likes">
         <div className="card__name">{item.name}</div>
         <button
           className={itemLikeButtonClassName}

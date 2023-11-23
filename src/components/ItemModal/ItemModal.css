@@ -2,15 +2,13 @@
   width: 101px;
   height: 24px;
   position: absolute;
-  bottom: 54px;
+  bottom: 15px;
   right: 32px;
   border: none;
   background: none;
   color: red;
 }
-.modal__delete-button:hover {
-  cursor: pointer;
-}
+
 .modal__description {
   position: relative;
 }
@@ -18,4 +16,14 @@
 .item__delete-button:hover {
   opacity: 0.6;
   cursor: pointer;
+}
+.modal__item-content {
+  display: flex;
+  background: white;
+  flex-direction: column;
+  border-radius: 20px;
+  box-sizing: none;
+  padding: 0;
+  padding-bottom: 32px;
+  position: relative;
 }

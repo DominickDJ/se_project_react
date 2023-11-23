@@ -1,15 +1,12 @@
 import React from "react";
 import "./ItemModal.css";
-import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
 const ItemModal = ({
   selectedCard,
   setActiveModal,
-  isOpen,
   buttonText,
   handleCloseModal,
   onClose,
-  isLoggedIn,
   currentUser,
 }) => {
   const handleOpenDeleteModal = () => {
@@ -32,23 +29,21 @@ const ItemModal = ({
   };
 
   return (
-    <ModalWithForm
-      buttonText={buttonText}
-      handleCloseModal={handleCloseModal}
-      isOpen={isOpen}
-      onClose={onClose}
-    >
-      <img
-        className="modal__image image_preview"
-        src={selectedCard.imageUrl}
-        alt="modalImage"
-      />
-      <div className="modal__description">
-        <div>{selectedCard.name}</div>
-        <div>{selectedCard.weather}</div>
+    <div className="modal" onClose={onClose}>
+      <div className="modal__item-content">
+        <div className="item__delete-button">{renderDeleteButton()}</div>
+        <button className="modal__close-button" onClick={onClose}></button>
+        <img
+          className="modal__image image_preview"
+          src={selectedCard.imageUrl}
+          alt="modalImage"
+        />
+        <div className="modal__description">
+          <div>{selectedCard.name}</div>
+          <div>{selectedCard.weather}</div>
+        </div>
       </div>
-      {renderDeleteButton()}
-    </ModalWithForm>
+    </div>
   );
 };
 

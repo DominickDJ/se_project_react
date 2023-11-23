@@ -19,7 +19,9 @@
   border: 1px;
   min-width: 450px;
 }
-
+.modal__content-image {
+  min-height: 610px;
+}
 .modal_title {
   padding-bottom: 24px;
   margin: 0;
@@ -34,9 +36,7 @@
 .modal__image {
   border-radius: 20px;
 }
-.modal__content-image {
-  min-height: 610px;
-}
+
 .modal__description {
   display: flex;
   flex-direction: column;

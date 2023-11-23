@@ -7,6 +7,9 @@ export const checkServerResponse = (res) => {
 export function getItems() {
   return fetch(`${baseUrl}/items`, {
     method: "GET",
+    headers: {
+      "Content-type": "application/json",
+    },
   }).then((res) => {
     return checkServerResponse(res);
   });
