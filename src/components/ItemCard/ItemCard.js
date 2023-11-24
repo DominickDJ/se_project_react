@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const ItemCard = ({ item, onSelectedCard, currentUser }) => {
+const ItemCard = ({ item, onSelectedCard, currentUser, handleLikeClick }) => {
   const handleCardClick = () => {
     onSelectedCard(item);
   };
@@ -11,8 +11,8 @@ const ItemCard = ({ item, onSelectedCard, currentUser }) => {
     }
     return false;
   });
-
-  const onlikeClick = () => {
+  const onLikeClick = () => {
+    handleLikeClick({ id: item._id, isLiked: isLiked });
     setIsLiked(!isLiked);
   };
 
@@ -31,10 +31,10 @@ const ItemCard = ({ item, onSelectedCard, currentUser }) => {
         />
       </div>
       <div className="card__description-likes">
-        <div className="card__name">{item.name}</div>
+        <div className="card__name card_item">{item.name}</div>
         <button
           className={itemLikeButtonClassName}
-          onClick={onlikeClick}
+          onClick={onLikeClick}
         ></button>
       </div>
     </div>

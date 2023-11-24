@@ -44,8 +44,8 @@ export function deleteItems(selectedCard, token) {
 }
 
 export const api = {
-  addCardLike: (id, token) => {
-    return fetch(`${baseUrl}/items/${id}/like`, {
+  addCardLike: (_id, token) => {
+    return fetch(`${baseUrl}/items/${_id}/likes`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -55,8 +55,8 @@ export const api = {
       return checkServerResponse(res);
     });
   },
-  removeCardLike: (id, token) => {
-    return fetch(`${baseUrl}/items/${id}/like`, {
+  removeCardLike: (_id, token) => {
+    return fetch(`${baseUrl}/items/${_id}/likes`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",

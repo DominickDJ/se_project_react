@@ -1,14 +1,22 @@
+.item_modal {
+  padding: 0;
+  margin: 0;
+}
+
 .item__delete-button {
   width: 101px;
   height: 24px;
   position: absolute;
-  bottom: 15px;
-  right: 32px;
+  right: 0px;
   border: none;
   background: none;
   color: red;
 }
-
+.image_preview {
+  max-width: 498px;
+  max-height: 610px;
+  width: fit-content;
+}
 .modal__description {
   position: relative;
 }

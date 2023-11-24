@@ -158,9 +158,9 @@ export default function App() {
     }
   }, [isLoggedIn]);
 
-  const handleLikeClick = ({ id, isLiked, user }) => {
+  const handleLikeClick = ({ id, isLiked }) => {
     const token = localStorage.getItem("jwt");
-    isLiked
+    !isLiked
       ? api
           .addCardLike(id, token)
           .then((updatedCard) => {
@@ -204,6 +204,7 @@ export default function App() {
                 clothingItems={clothingItems}
                 setIsLoggedIn={setIsLoggedIn}
                 isLoggedIn={isLoggedIn}
+                handleLikeClick={handleLikeClick}
               ></Profile>
             </ProtectedRoute>
           </Switch>

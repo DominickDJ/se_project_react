@@ -3,7 +3,12 @@ import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import "./ClothesSection.css";
 import ClothingList from "../ClothingList/ClothingList";
 
-const ClothesSection = ({ onCreateModal, clothingItems, onSelectedCard }) => {
+const ClothesSection = ({
+  handleLikeClick,
+  onCreateModal,
+  clothingItems,
+  onSelectedCard,
+}) => {
   const { currentUser } = useContext(CurrentUserContext);
   // Filter the clothing items to show only the ones added by the current user
   const userClothingItems = clothingItems.filter(
@@ -27,6 +32,7 @@ const ClothesSection = ({ onCreateModal, clothingItems, onSelectedCard }) => {
       <ClothingList
         onSelectedCard={onSelectedCard}
         clothingItems={userClothingItems}
+        handleLikeClick={handleLikeClick}
       />
     </div>
   );

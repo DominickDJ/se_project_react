@@ -19,7 +19,7 @@ export default function ModalWithForm({
   };
 
   return (
-    <div onClick={handleClickClose} className={`modal modal_type_${name}`}>
+    <div onClick={handleClickClose} className={`modal`}>
       <div className="modal__content" ref={ref}>
         <button
           className="modal__close-button_add"

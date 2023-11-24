@@ -49,37 +49,35 @@ export default function EditProfileModal({
         isLoading={isLoading}
       >
         <div className="modal__label-input">
-          <div className="modal__label">
-            <label>
-              <span> Name*</span>
-              <input
-                className="modal__input"
-                placeholder="Name"
-                minLength="1"
-                type="text"
-                value={name}
-                onChange={handleNameChange}
-              />
-            </label>
-            <label>
-              <span>Avatar</span>
-              <input
-                className="modal__input"
-                placeholder="Avatar"
-                minLength="1"
-                type="text"
-                value={avatar}
-                onChange={handleAvatarChange}
-              />
-            </label>
-            <button
-              type="submit"
-              className="modal__submit-button"
-              disabled={isLoading}
-            >
-              {isLoading ? "Loading..." : "Save changes"}
-            </button>
-          </div>
+          <label className="modal__label">
+            <span> Name*</span>
+            <input
+              className="modal__input"
+              placeholder="Name"
+              minLength="1"
+              type="text"
+              value={name}
+              onChange={handleNameChange}
+            />
+          </label>
+          <label className="modal__label-input">
+            <span>Avatar</span>
+            <input
+              className="modal__input"
+              placeholder="Avatar"
+              minLength="1"
+              type="text"
+              value={avatar}
+              onChange={handleAvatarChange}
+            />
+          </label>
+          <button
+            type="submit"
+            className="modal__submit-button"
+            disabled={isLoading}
+          >
+            {isLoading ? "Loading..." : "Save changes"}
+          </button>
         </div>
       </ModalWithForm>
     </div>

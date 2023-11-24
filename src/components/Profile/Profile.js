@@ -9,6 +9,7 @@ const Profile = ({
   weatherTemp,
   onSelectedCard,
   setIsLoggedIn,
+  handleLikeClick,
 }) => {
   const user = {
     username: "User Name",
@@ -38,6 +39,7 @@ const Profile = ({
         clothingItems={clothingItems}
         weatherTemp={weatherTemp}
         onSelectedCard={onSelectedCard}
+        handleLikeClick={handleLikeClick}
       />
     </div>
   );

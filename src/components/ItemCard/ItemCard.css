@@ -20,6 +20,7 @@
   border: none;
   transition: all 0.3s;
   top: 20px;
+  padding-left: 30px;
 }
 .like-button_clicked {
   background: transparent url(../../images/likeButtonClicked.svg) center
@@ -45,11 +46,16 @@
 }
 .card__description-likes {
   display: flex;
+  position: relative;
+  bottom: 320px;
+  left: 110px;
+  width: 100px;
   align-items: center;
   justify-content: center;
 }
-.image_preview {
-  max-width: 75vw;
-  max-height: 75vh;
-  width: fit-content;
+.card_item {
+  background-color: white;
+  display: flex;
+  padding-right: 0px;
+  padding: 2px;
 }

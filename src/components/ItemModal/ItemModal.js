@@ -4,7 +4,6 @@ import "./ItemModal.css";
 const ItemModal = ({
   selectedCard,
   setActiveModal,
-  buttonText,
   handleCloseModal,
   onClose,
   currentUser,
@@ -29,9 +28,8 @@ const ItemModal = ({
   };
 
   return (
-    <div className="modal" onClose={onClose}>
+    <div className="modal item_modal" onClose={onClose}>
       <div className="modal__item-content">
-        <div className="item__delete-button">{renderDeleteButton()}</div>
         <button className="modal__close-button" onClick={onClose}></button>
         <img
           className="modal__image image_preview"
@@ -41,6 +39,7 @@ const ItemModal = ({
         <div className="modal__description">
           <div>{selectedCard.name}</div>
           <div>{selectedCard.weather}</div>
+          <div className="item__delete-button">{renderDeleteButton()}</div>
         </div>
       </div>
     </div>
