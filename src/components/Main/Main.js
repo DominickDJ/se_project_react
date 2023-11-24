@@ -8,6 +8,7 @@ export default function Main({
   onSelectedCard,
   clothingItems,
   handleLikeClick,
+  isLoggedIn,
 }) {
   const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
   const temp = weatherTemp?.temperature?.[currentTemperatureUnit] || 999;
@@ -21,6 +22,7 @@ export default function Main({
       <section className="card__section" id="cardSection">
         Today is {temp}°{currentTemperatureUnit} / You may want to wear:
         <ClothingList
+          isLoggedIn={isLoggedIn}
           onSelectedCard={onSelectedCard}
           clothingItems={filterCards}
           handleLikeClick={handleLikeClick}

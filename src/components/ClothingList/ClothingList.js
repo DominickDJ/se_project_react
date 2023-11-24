@@ -1,7 +1,12 @@
 import React from "react";
 import ItemCard from "../ItemCard/ItemCard";
 import "./ClothingList.css";
-const ClothingList = ({ onSelectedCard, clothingItems, handleLikeClick }) => {
+const ClothingList = ({
+  isLoggedIn,
+  onSelectedCard,
+  clothingItems,
+  handleLikeClick,
+}) => {
   return (
     <section className="clothing__section" id="cardSection">
       <div className="card__items">
@@ -10,6 +15,7 @@ const ClothingList = ({ onSelectedCard, clothingItems, handleLikeClick }) => {
             handleLikeClick={handleLikeClick}
             key={key}
             item={item}
+            isLoggedIn={isLoggedIn}
             onSelectedCard={onSelectedCard}
           />
         ))}

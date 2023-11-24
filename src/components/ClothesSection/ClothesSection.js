@@ -8,9 +8,9 @@ const ClothesSection = ({
   onCreateModal,
   clothingItems,
   onSelectedCard,
+  isLoggedIn,
 }) => {
   const { currentUser } = useContext(CurrentUserContext);
-  // Filter the clothing items to show only the ones added by the current user
   const userClothingItems = clothingItems.filter(
     (item) => item.owner === currentUser._id
   );
@@ -30,6 +30,7 @@ const ClothesSection = ({
         </button>
       </div>
       <ClothingList
+        isLoggedIn={isLoggedIn}
         onSelectedCard={onSelectedCard}
         clothingItems={userClothingItems}
         handleLikeClick={handleLikeClick}

@@ -10,6 +10,7 @@ const Profile = ({
   onSelectedCard,
   setIsLoggedIn,
   handleLikeClick,
+  isLoggedIn,
 }) => {
   const user = {
     username: "User Name",
@@ -35,6 +36,7 @@ const Profile = ({
         onCreateModal={onCreateModal}
       />
       <ClothesSection
+        isLoggedIn={isLoggedIn}
         onCreateModal={onCreateModal}
         clothingItems={clothingItems}
         weatherTemp={weatherTemp}

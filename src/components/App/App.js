@@ -194,6 +194,7 @@ export default function App() {
                 weatherTemp={temp}
                 onSelectedCard={handleSelectedCard}
                 clothingItems={clothingItems}
+                isLoggedIn={isLoggedIn}
                 handleLikeClick={handleLikeClick}
               />
             </Route>
