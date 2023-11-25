@@ -1,12 +1,9 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
-const ItemCard = ({
-  isLoggedIn,
-  item,
-  onSelectedCard,
-  currentUser,
-  handleLikeClick,
-}) => {
+const ItemCard = ({ isLoggedIn, item, onSelectedCard, handleLikeClick }) => {
+  const { currentUser } = useContext(CurrentUserContext);
+
   const handleCardClick = () => {
     onSelectedCard(item);
   };
