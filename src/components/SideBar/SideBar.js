@@ -1,11 +1,10 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import avatarImage from "../../images/avatar.svg";
 import "./SideBar.css";
 import "../Header/Header.css";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 const SideBar = ({ onCreateModal, setIsLoggedIn }) => {
-  const { currentUser, setCurrentUser, isLoggedIn } =
-    useContext(CurrentUserContext);
+  const { currentUser } = useContext(CurrentUserContext);
 
   const handleLogout = () => {
     localStorage.removeItem("jwt");

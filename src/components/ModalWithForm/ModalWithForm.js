@@ -25,7 +25,7 @@ export default function ModalWithForm({
           className="modal__close-button_add"
           type="button"
           onClick={onClose}
-        ></button>
+        />
         <form className="modal__form" onSubmit={onSubmit}>
           <h3 className="modal_title">{title}</h3>
           {children}

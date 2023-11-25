@@ -28,7 +28,7 @@ const ItemCard = ({ isLoggedIn, item, onSelectedCard, handleLikeClick }) => {
     <div>
       <div>
         <img
-          alt="card"
+          alt={item.name}
           className="card__image image__preview"
           onClick={handleCardClick}
           src={item.imageUrl}

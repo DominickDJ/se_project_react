@@ -29,19 +29,11 @@ const RegisterModal = ({
     setAvatarUrl(e.target.value);
   };
 
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setIsLoading(true);
-    onRegister({ email, password, name, avatar })
-      .then(() => {
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        console.error(error);
-        setIsLoading(false);
-      });
+    onRegister({ email, password, name, avatar });
   };
   const handleOpenLoginModal = () => {
     setActiveModal("LoginModal");

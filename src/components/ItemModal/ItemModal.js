@@ -1,17 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./ItemModal.css";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
 const ItemModal = ({
   selectedCard,
   setActiveModal,
   handleCloseModal,
   onClose,
-  currentUser,
 }) => {
   const handleOpenDeleteModal = () => {
     setActiveModal("ConfirmModal");
   };
-
+  const { currentUser } = useContext(CurrentUserContext);
   const renderDeleteButton = () => {
     if (currentUser._id === selectedCard.owner) {
       return (
@@ -34,11 +34,11 @@ const ItemModal = ({
         <img
           className="modal__image image_preview"
           src={selectedCard.imageUrl}
-          alt="modalImage"
+          alt={selectedCard.name}
         />
         <div className="modal__description">
-          <div>{selectedCard.name}</div>
-          <div>{selectedCard.weather}</div>
+          <h3>{selectedCard.name}</h3>
+          <p>{selectedCard.weather}</p>
           <div className="item__delete-button">{renderDeleteButton()}</div>
         </div>
       </div>

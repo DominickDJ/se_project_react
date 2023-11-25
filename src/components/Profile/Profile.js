@@ -16,7 +16,7 @@ const Profile = ({
     username: "User Name",
     avatar: "../../images/avatar.svg",
   };
-  const [openEditModal, setOpenEditModal] = useState(false);
+  const [setOpenEditModal] = useState(false);
 
   const handleOpenEditModal = () => {
     setOpenEditModal(true);

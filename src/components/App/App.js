@@ -54,35 +54,42 @@ export default function App() {
 
   //API Calls
   const onRegister = (name, avatar, email, password) => {
+    setIsLoading(true);
     return signUp(name, avatar, email, password)
       .then(() => {
         setIsLoggedIn(true);
         handleCloseModal();
       })
-      .catch((error) => {
-        console.error(error);
+      .catch(console.error)
+      .finally(() => {
+        setIsLoading(false);
       });
   };
-  const onSubmit = (name, avatar) => {
+
+  const onProfileSubmit = (name, avatar) => {
+    setIsLoading(true);
     const token = localStorage.getItem("jwt");
     return editProfile(token, name, avatar)
       .then((name, avatar) => {
         setCurrentUser(name, avatar);
         handleCloseModal();
       })
-      .catch((error) => {
-        console.error(error);
+      .catch(console.error)
+      .finally(() => {
+        setIsLoading(false);
       });
   };
 
   const onLogin = (email, password) => {
+    setIsLoading(true);
     return signIn(email, password)
       .then((data) => {
         setIsLoggedIn(true);
         handleCloseModal();
       })
-      .catch((error) => {
-        console.error(error);
+      .catch(console.error)
+      .finally(() => {
+        setIsLoading(false);
       });
   };
 
@@ -91,9 +98,7 @@ export default function App() {
       .then((items) => {
         setClothingItems(items);
       })
-      .catch((error) => {
-        console.error(error);
-      });
+      .catch(console.error);
   };
 
   const onDelete = () => {
@@ -105,9 +110,7 @@ export default function App() {
         );
         handleCloseModal();
       })
-      .catch((error) => {
-        console.error(error);
-      });
+      .catch(console.error);
   };
 
   const onAddItem = (values) => {
@@ -135,9 +138,7 @@ export default function App() {
         const temperature = parseWeatherData(data);
         setTemp(temperature);
       })
-      .catch((error) => {
-        console.error(error);
-      });
+      .catch(console.error);
   }, []);
 
   useEscape(handleCloseModal);
@@ -168,7 +169,7 @@ export default function App() {
               cards.map((c) => (c._id === id ? updatedCard : c))
             );
           })
-          .catch((err) => console.log(err))
+          .catch(console.error)
       : api
           .removeCardLike(id, token)
           .then((updatedCard) => {
@@ -176,7 +177,7 @@ export default function App() {
               cards.map((c) => (c._id === id ? updatedCard : c))
             );
           })
-          .catch((err) => console.log(err));
+          .catch(console.error);
   };
 
   return (
@@ -213,7 +214,7 @@ export default function App() {
           {activeModal === "EditProfileModal" && (
             <EditProfileModal
               setActiveModal={setActiveModal}
-              onSubmit={onSubmit}
+              onProfileSubmit={onProfileSubmit}
               onClose={handleCloseModal}
               onCreateModal={handleCreateModal}
               isOpen={activeModal === "EditProfileModal"}
