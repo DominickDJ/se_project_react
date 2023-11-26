@@ -57,7 +57,6 @@ export default function App() {
     setIsLoading(true);
     return signUp(name, avatar, email, password)
       .then(() => {
-        setIsLoggedIn(true);
         handleCloseModal();
       })
       .catch(console.error)
