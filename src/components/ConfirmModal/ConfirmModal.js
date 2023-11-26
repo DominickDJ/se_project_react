@@ -9,9 +9,8 @@ const ConfirmModal = ({
   buttonText,
   onDelete,
   selectedCard,
+  isLoading,
 }) => {
-  const [isLoading] = useState(false);
-
   const handleDelete = (e) => {
     e.preventDefault();
     onDelete(selectedCard);

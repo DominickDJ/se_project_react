@@ -217,6 +217,7 @@ export default function App() {
               onProfileSubmit={onProfileSubmit}
               onClose={handleCloseModal}
               onCreateModal={handleCreateModal}
+              isLoading={isLoading}
               isOpen={activeModal === "EditProfileModal"}
               buttonText={isLoading ? "Saving..." : "Edit Profile"}
             />
@@ -228,6 +229,7 @@ export default function App() {
               isOpen={activeModal === "ConfirmModal"}
               onDelete={onDelete}
               onClose={handleCloseModal}
+              isLoading={isLoading}
             />
           )}
           {activeModal === "create" && (
@@ -257,6 +259,7 @@ export default function App() {
               onLogin={onLogin}
               setActiveModal={setActiveModal}
               currentUser={currentUser}
+              isLoading={isLoading}
             />
           )}
           {activeModal === "RegisterModal" && (

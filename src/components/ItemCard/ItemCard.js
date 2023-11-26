@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
 const ItemCard = ({ isLoggedIn, item, onSelectedCard, handleLikeClick }) => {
@@ -8,12 +8,13 @@ const ItemCard = ({ isLoggedIn, item, onSelectedCard, handleLikeClick }) => {
     onSelectedCard(item);
   };
 
-  const [isLiked, setIsLiked] = useState(() => {
+  const [isLiked, setIsLiked] = useState(false);
+
+  useEffect(() => {
     if (currentUser && currentUser._id) {
-      return item.likes.some((id) => id === currentUser._id);
+      setIsLiked(item.likes.some((id) => id === currentUser._id));
     }
-    return false;
-  });
+  }, [currentUser, item]);
 
   const onLikeClick = () => {
     setIsLiked(!isLiked);

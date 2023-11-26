@@ -9,6 +9,7 @@ const LoginModal = ({
   setActiveModal,
   isOpen,
   buttonText,
+  isLoading,
 }) => {
   const [email, setEmail] = useState("");
   const handleEmailChange = (e) => {
@@ -19,8 +20,6 @@ const LoginModal = ({
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
   };
-
-  const [isLoading] = useState(false);
 
   const handleLogin = (e) => {
     e.preventDefault();

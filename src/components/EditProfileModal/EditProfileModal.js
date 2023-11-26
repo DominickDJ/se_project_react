@@ -9,11 +9,11 @@ export default function EditProfileModal({
   onClose,
   buttonText,
   isOpen,
+  isLoading,
 }) {
   const { currentUser } = useContext(CurrentUserContext);
   const [name, setName] = useState(currentUser.name);
   const [avatar, setAvatar] = useState(currentUser.avatar);
-  const [isLoading] = useState(false);
 
   const handleNameChange = (e) => {
     setName(e.target.value);

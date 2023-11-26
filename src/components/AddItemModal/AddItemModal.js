@@ -22,7 +22,6 @@ const AddItemModal = ({ handleCloseModal, onAddItem, isOpen, buttonText }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     onAddItem({ name, imageUrl, weather });
   };
 
@@ -71,7 +70,9 @@ const AddItemModal = ({ handleCloseModal, onAddItem, isOpen, buttonText }) => {
             name="input"
             onChange={handleWeatherChange}
           />
-          <label id="hot">Hot</label>
+          <label htmlFor="hot" id="hot">
+            Hot
+          </label>
         </div>
         <div>
           <input
@@ -81,7 +82,9 @@ const AddItemModal = ({ handleCloseModal, onAddItem, isOpen, buttonText }) => {
             name="input"
             onChange={handleWeatherChange}
           />
-          <label id="warm">Warm</label>
+          <label htmlFor="warm" id="warm">
+            Warm
+          </label>
         </div>
         <div>
           <input
@@ -91,7 +94,9 @@ const AddItemModal = ({ handleCloseModal, onAddItem, isOpen, buttonText }) => {
             name="input"
             onChange={handleWeatherChange}
           />
-          <label id="cold">Cold</label>
+          <label htmlFor="cold" id="cold">
+            Cold
+          </label>
         </div>
         <button
           type="submit"
