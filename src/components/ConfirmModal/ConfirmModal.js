@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import "./ConfirmModal.css";
 import "../ModalWithForm/ModalWithForm.css";
